@@ -19,7 +19,7 @@ import VersionesCalculoTable from '../components/VersionesCalculoTable'
 import HistoricalTable from '../components/HistoricalTable'
 
 import '../index.css'
-function Home() {
+function IVAHome() {
   const navigate = useNavigate()
   const [tabIndex, setTabIndex] = useState(0)
   //const [rfcSelected, setRfcSelected] = useState('1');
@@ -242,4 +242,4 @@ function Home() {
   )
 }
 
-export default Home
+export default IVAHome

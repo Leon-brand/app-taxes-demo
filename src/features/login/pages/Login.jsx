@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import LoginForm from './LoginForm'
+import LoginForm from '../components/LoginForm'
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 

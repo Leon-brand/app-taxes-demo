@@ -1,10 +1,11 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 
-import Home from './pages/Home'
+import IVAHome from './pages/IVAHome'
 import ReporteHallazgos from './pages/ReporteHallazgos'
 import PieChartDetails from './pages/PieChartDetails'
 import VersionesCalculo from './pages/VersionesCalculo'
-import Login from './pages/Login/Login'
+import Login from './features/login/pages/Login'
+import Home from './features/home/pages/Home'
 
 import ScrollToTop from './hooks/ScrollToTop'
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="iva-home" element={<IVAHome/>}/>
         <Route path="/reporte-hallazgos" element={<ReporteHallazgos />} />
         <Route path="/grafica-detalles" element={<PieChartDetails />} />
         <Route path="/versiones-calculo" element={<VersionesCalculo />} />

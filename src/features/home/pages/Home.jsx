@@ -10,21 +10,21 @@ const Home = () => {
           onClick={() => navigate('/iva')}
           className="bg-blue-600 text-white text-xl font-semibold py-6 rounded-lg shadow hover:bg-blue-700 transition-all duration-300"
         >
-          IVA Section
+          Módulo IVA
         </button>
 
         <button
           onClick={() => navigate('/isr')}
           className="bg-green-600 text-white text-xl font-semibold py-6 rounded-lg shadow hover:bg-green-700 transition-all duration-300"
         >
-          ISR Section
+          Módulo ISR
         </button>
 
         <button
           onClick={() => navigate('/otro')}
           className="bg-yellow-500 text-white text-xl font-semibold py-6 rounded-lg shadow hover:bg-yellow-600 transition-all duration-300"
         >
-          Otra sección
+          Módulo Bóveda
         </button>
       </div>
     </div>
