@@ -8,7 +8,7 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import PieChart from '../components/PieChart'
 import CheckTable from '../components/CheckTable'
 import DownloadTable from '../components/DownloadTable'
-import ModalNotepad from '../components/ModalNotepad'
+import ModalNotepad from '../../../components/ModalNotepad'
 
 const ReporteHallazgos = () => {
 

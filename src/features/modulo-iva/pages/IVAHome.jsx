@@ -10,16 +10,16 @@ import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined'
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined'
 
-import Sidebar from '../components/Sidebar'
-import TabsComponent from '../components/TabsComponent'
-import IvaTable from '../components/IvaTable'
-import PieChart from '../components/PieChart'
-import CustomSelect from '../components/CustomSelect'
-import VersionesCalculoTable from '../components/VersionesCalculoTable'
-import HistoricalTable from '../components/HistoricalTable'
+import Sidebar from '@/components/Sidebar'
+import TabsComponent from '@/features/modulo-iva/components/TabsComponent'
+import IvaTable from '@/features/modulo-iva/components/IvaTable'
+import PieChart from '@/features/modulo-iva/components/PieChart'
+import CustomSelect from '@/features/modulo-iva/components/CustomSelect'
+import VersionesCalculoTable from '@/features/modulo-iva/components/VersionesCalculoTable'
+import HistoricalTable from '@/features/modulo-iva/components/HistoricalTable'
 
-import '../index.css'
-function IVAHome() {
+import '@/index.css'
+const IVAHome = () => {
   const navigate = useNavigate()
   const [tabIndex, setTabIndex] = useState(0)
   //const [rfcSelected, setRfcSelected] = useState('1');
@@ -88,7 +88,6 @@ function IVAHome() {
 
   useEffect(() => {
     {
-      console.log('Fetch con:', selectedMonth, selectedYear)
       // fetchData(selectedMonth, selectedYear) simulado segun la fecha elegida
     }
   }, [selectedMonth, selectedYear])

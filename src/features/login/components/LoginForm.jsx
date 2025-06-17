@@ -40,7 +40,7 @@ const LoginForm = ({ onSubmit, isColumnLayout }) => {
             style={{ fontSize: '18px' }}
             required
           />
-          <PersonOutlineOutlinedIcon className="text-gray-400 ml-2" fontSize="large" />
+          <PersonOutlineOutlinedIcon className="text-gray-400 ml-2" fontSize="medium" />
         </div>
       </div>
       {/*Contraseña*/}
@@ -56,7 +56,7 @@ const LoginForm = ({ onSubmit, isColumnLayout }) => {
             style={{ fontSize: '18px' }}
             required
           />
-          <KeyOutlinedIcon className="text-gray-400 ml-2" fontSize="large" />
+          <KeyOutlinedIcon className="text-gray-400 ml-2" fontSize="medium" />
         </div>
       </div>
 

@@ -8,7 +8,7 @@ import FlareOutlinedIcon from '@mui/icons-material/FlareOutlined'
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined'
 
 import CheckTable from '../components/CheckTable'
-import ModalNotepad from '../components/ModalNotepad'
+import ModalNotepad from '../../../components/ModalNotepad'
 
 const PieChartDetails = () => {
   const [tableData, setTableData] = useState([])
