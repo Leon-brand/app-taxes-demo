@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 
 import IVAHome from './features/modulo-iva/pages/IVAHome'
 import BovedaHome from './features/modulo-boveda/pages/BovedaHome'
@@ -14,6 +14,8 @@ import Header from './components/Header'
 
 function App() {
   const location = useLocation()
+  //Simulacion de sesion iniciada
+  const isAuthenticated = localStorage.getItem('auth') === 'true'
 
   return (
     <>
@@ -21,7 +23,18 @@ function App() {
       { location.pathname !== '/login' && <Header /> }
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        {/* 👇 Protegemos Home para que redirija a login si no hay sesión */}
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Home />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
         <Route path="iva-home" element={<IVAHome/>}/>
         <Route path="/boveda-home" element={<BovedaHome />} />
         <Route path="/reporte-hallazgos" element={<ReporteHallazgos />} />

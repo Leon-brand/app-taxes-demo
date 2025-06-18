@@ -25,6 +25,7 @@ const Login = () => {
       setIsLoggingIn(false)
 
       if (isValid) {
+        localStorage.setItem('auth', 'true')
         navigate('/')
       } else {
         setIsLoggingIn(false)
@@ -32,7 +33,7 @@ const Login = () => {
           alert('Verifica tus credenciales por favor')
         }, 100)
       }
-    }, 5000)
+    }, 3000)
   }
   /*   const handleSubmit = async (credentials) => {
     setIsLoggingIn(true)
