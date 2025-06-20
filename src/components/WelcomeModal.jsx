@@ -1,4 +1,3 @@
-// components/WelcomeModal.jsx
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
