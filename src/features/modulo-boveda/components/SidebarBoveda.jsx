@@ -6,7 +6,6 @@ import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded'
 import FrontHandOutlinedIcon from '@mui/icons-material/FrontHandOutlined'
 import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined'
 import BookmarkAddedOutlinedIcon from '@mui/icons-material/BookmarkAddedOutlined'
-import MenuIcon from '@mui/icons-material/Menu'
 
 const SidebarBoveda = ({ onSelectTab, activeTab }) => {
   const [open, setOpen] = useState(true)
@@ -23,7 +22,7 @@ const SidebarBoveda = ({ onSelectTab, activeTab }) => {
       <div className="w-full">
         <div className="relative w-full text-center">
           {/* 👇 Botón hamburguesa agregado */}
-{/*           <button
+          {/*           <button
             onClick={() => setOpen(!open)}
             className="my-4 text-[#143559] hover:bg-gray-200 p-2 rounded-full"
           >

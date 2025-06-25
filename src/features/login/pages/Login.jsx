@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import LoginForm from '../components/LoginForm'
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
+//import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
 const Login = () => {
@@ -168,8 +168,6 @@ const Login = () => {
             }}
           />
         </div>
-
-        {/* Botón de ayuda, solo cuando NO está iniciando */}
         {/*!isLoggingIn && (
           <div className="mt-6 w-[400px] flex justify-center">
             <button

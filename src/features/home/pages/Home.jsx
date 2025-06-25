@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <>
       <WelcomeModal isOpen={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} />
-      <div className="min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-14">        
+      <div className="min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-14">
         <div className="flex justify-between items-start w-full mb-8">
           <div>
             <h1 className="text-3xl font-bold text-[#143559]">Bienvenido</h1>
@@ -66,7 +66,7 @@ const Home = () => {
             </button>
             <button
               onClick={() => navigate('/boveda-home')}
-              className="flex flex-col items-center justify-center px-4 py-6 rounded-lg 
+              className="flex flex-col items-center justify-center px-4 py-6 rounded-lg
                       text-white bg-[#143559] shadow hover:bg-[#0077FF] transition-all max-h-[120px]">
               <Vault size={50} />
               <span className="font-medium text-center">Bóveda Fiscal</span>
