@@ -10,7 +10,7 @@ import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined'
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined'
 
-import Sidebar from '@/components/Sidebar'
+import SidebarIVA from '../components/SidebarIVA'
 import TabsComponent from '@/features/modulo-iva/components/TabsComponent'
 import IvaTable from '@/features/modulo-iva/components/IvaTable'
 import PieChart from '@/features/modulo-iva/components/PieChart'
@@ -94,7 +94,7 @@ const IVAHome = () => {
 
   return (
     <div className="flex mt-16 w-full">
-      <Sidebar
+      <SidebarIVA
         activeTab={tabIndex}
         onSelectTab={(index) => {
           setTabIndex(index)

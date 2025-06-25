@@ -52,7 +52,7 @@ const Home = () => {
                       text-white bg-[#143559] shadow hover:bg-[#0077FF] transition-all max-h-[120px]"
             >
               <Target size={50} />
-              <span className="font-semibold">Determinar</span>
+              <span className="font-medium">Determinar</span>
             </button>
             <button className="flex flex-col items-center justify-center px-4 py-6 border rounded-lg
                       text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px]">
@@ -69,7 +69,7 @@ const Home = () => {
               className="flex flex-col items-center justify-center px-4 py-6 rounded-lg 
                       text-white bg-[#143559] shadow hover:bg-[#0077FF] transition-all max-h-[120px]">
               <Vault size={50} />
-              <span className="font-semibold text-center">Bóveda Fiscal</span>
+              <span className="font-medium text-center">Bóveda Fiscal</span>
             </button>
             <button className="flex flex-col items-center justify-center px-4 py-6 border rounded-lg
                       text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px]">

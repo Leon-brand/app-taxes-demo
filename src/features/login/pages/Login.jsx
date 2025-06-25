@@ -170,7 +170,7 @@ const Login = () => {
         </div>
 
         {/* Botón de ayuda, solo cuando NO está iniciando */}
-        {!isLoggingIn && (
+        {/*!isLoggingIn && (
           <div className="mt-6 w-[400px] flex justify-center">
             <button
               className="
@@ -183,9 +183,8 @@ const Login = () => {
               <span className="font-extrabold">Ayuda</span>
             </button>
           </div>
-        )}
+        )*/}
       </div>
-
     </div>
   )
 }
