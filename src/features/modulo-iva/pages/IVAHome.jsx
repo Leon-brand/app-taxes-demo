@@ -14,7 +14,7 @@ import SidebarIVA from '../components/SidebarIVA'
 import TabsComponent from '@/features/modulo-iva/components/TabsComponent'
 import IvaTable from '@/features/modulo-iva/components/IvaTable'
 import PieChart from '@/features/modulo-iva/components/PieChart'
-import CustomSelect from '@/features/modulo-iva/components/CustomSelect'
+import CustomDropDown from '@/components/CustomeDropDown'
 import VersionesCalculoTable from '@/features/modulo-iva/components/VersionesCalculoTable'
 import HistoricalTable from '@/features/modulo-iva/components/HistoricalTable'
 
@@ -22,7 +22,6 @@ import '@/index.css'
 const IVAHome = () => {
   const navigate = useNavigate()
   const [tabIndex, setTabIndex] = useState(0)
-  //const [rfcSelected, setRfcSelected] = useState('1');
   const [activedBtn, setActivedBtn] = useState(null)
   const [titulo, setTitulo] = useState('Trasladado')
   const [modalOpen, setModalOpen] = useState(false)
@@ -112,13 +111,14 @@ const IVAHome = () => {
           </div>
         </div>
         <div className="flex gap-8 mb-6">
-          <CustomSelect
+          <CustomDropDown
             data={months}
             value={selectedMonth}
             onChange={setSelectedMonth}
             placeholder="Seleccione un mes"
+            className="h-[34px] w-[165px] text-center justify-center"
           />
-          <CustomSelect
+          <CustomDropDown
             data={years}
             value={selectedYear}
             onChange={setSelectedYear}
