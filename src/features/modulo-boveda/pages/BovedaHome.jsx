@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Calculator } from 'lucide-react'
-import { BanknoteArrowUp } from 'lucide-react'
-import { Landmark } from 'lucide-react'
-import { Scroll } from 'lucide-react'
+import { Calculator, BanknoteArrowUp, Landmark, Scroll } from 'lucide-react'
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import RequestPageOutlinedIcon from '@mui/icons-material/RequestPageOutlined'
@@ -28,7 +25,7 @@ const BovedaHome = () => {
             </button>
             <h1 className="text-3xl font-bold">Bóveda Fiscal</h1>
           </div>
-          <div>|
+          <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 24 24"><path
               fill="currentColor" d="M12.75 9a.75.75 0 0 0-1.5 0v.354q-.32.09-.604.252a.75.75 0 0 0-1.04
                 1.04a2.7 2.7 0 0 0-.252.604H9a.75.75 0 0 0 0 1.5h.354q.09.32.252.604a.75.75 0 0 0
@@ -80,7 +77,7 @@ const BovedaHome = () => {
               </button>
               <button
                 className="flex flex-col items-center justify-center px-4 py-6 border-2 border-[#848484] rounded-lg
-                           text-gay-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px]"
+                           text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px]"
               >
                 <BanknoteArrowUp size={50}/>
                 <span className="font-medium text-center">Declaraciones</span>

@@ -4,13 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import WelcomeModal from '@/components/WelcomeModal'
 import ModalDeterminar from '@/components/ModalDeterminar'
 
-import { MessageSquareReply } from 'lucide-react'
-import { Search } from 'lucide-react'
-import { Target } from 'lucide-react'
-import { ListTodo } from 'lucide-react'
-import { Vault } from 'lucide-react'
-import { Handshake } from 'lucide-react'
-import { Link } from 'lucide-react'
+import { MessageSquareReply, Search, Target, ListTodo, Handshake, Link } from 'lucide-react'
 
 const Home = () => {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
@@ -19,9 +13,14 @@ const Home = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowWelcomeModal(true)
-    }, 1000)
+    const alreadyShown = localStorage.getItem('hasSeenWelcomeModal')
+
+    if (!alreadyShown) {
+      setTimeout(() => {
+        setShowWelcomeModal(true)
+        localStorage.setItem('hasSeenWelcomeModal', 'true')
+      }, 1000)
+    }
   }, [])
 
   return (
@@ -68,7 +67,7 @@ const Home = () => {
               onClick={() => navigate('/boveda-home')}
               className="flex flex-col items-center justify-center px-2 py-3 rounded-lg
                       text-white bg-[#143559] shadow hover:bg-[#0077FF] transition-all max-h-[120px]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="56" height="54" viewBox="0 0 24 24"><path 
+              <svg xmlns="http://www.w3.org/2000/svg" width="56" height="54" viewBox="0 0 24 24"><path
                 fill="currentColor" d="M12.75 9a.75.75 0 0 0-1.5 0v.354q-.32.09-.604.252a.75.75 0 0 0-1.04
                 1.04a2.7 2.7 0 0 0-.252.604H9a.75.75 0 0 0 0 1.5h.354q.09.32.252.604a.75.75 0 0 0
                 1.04 1.04q.283.161.604.252V15a.75.75 0 0 0 1.5 0v-.354q.32-.09.604-.252a.75.75 0 0 0

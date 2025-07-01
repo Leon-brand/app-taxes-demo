@@ -22,7 +22,7 @@ const SidebarBoveda = ({ onSelectTab, activeTab }) => {
 
   return (
     // Esta línea reemplazada para que el ancho del sidebar dependa de `open`
-    <aside className={`${open ? 'w-40' : 'w-16'} min-h-screen p-0.5 border-r bg-[#E5E9EA] flex flex-col items-center transition-all duration-300`}>
+    <aside className="w-40 min-h-screen p-0.5 border-r bg-[#E5E9EA] flex flex-col items-center transition-all duration-300">
       <div className="w-full">
         <div className="relative w-full text-center mt-24">
           <button
