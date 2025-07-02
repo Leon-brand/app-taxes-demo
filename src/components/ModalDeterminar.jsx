@@ -46,26 +46,29 @@ const ModalDeterminar = ({ isOpen, onClose }) => {
         <div className="flex justify-center gap-x-8 mb-8 mt-4">
           <button
             onClick={() => navigate('/iva-home')}
-            className="flex flex-col items-center justify-center px-1 py-2
-            rounded-lg text-white bg-[#143559] shadow-lg hover:bg-[#0077FF] transition-all max-h-[120px] w-48"
+            className="flex flex-col items-center justify-center px-1 py-2 rounded-lg shadow-[3px_6px_8px_-1px_rgba(20,53,89,0.5)]
+              text-white bg-[#143559] hover:bg-[#0077FF] transition-all max-h-[120px] w-48"
           >
-            <BookmarkAddedOutlinedIcon fontSize='large' className='mb-2'/>
+            <BookmarkAddedOutlinedIcon fontSize='large' className=' !w-12 !h-12'/>
             <span className="text-md font-semibold">IVA</span>
           </button>
           <button
-            className="flex flex-col items-center justify-center px-4 py-6
-            rounded-lg text-gray-600 bg-gray-200 hover:bg-gray-300
-            shadow-md transition-all w-48"
+            className="flex flex-col items-center justify-center px-4 py-6 rounded-lg border-2 border-[#848484]
+              text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all max-h-[120px] w-48 cursor-not-allowed" disabled
           >
-            <svg className='mb-1 w-8 h-8' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M13.574 12.75h-2.033a1.342 1.342 0 0 0-.5 2.587l2.064.826a1.342 1.342 0 0 1-.5 2.587h-2.031m1.5-6V12m0 7.5v-.75m-5.25-10.5h10.5M15.63 5.036l1.438-2.876a.75.75 0 0 0-1.006-1.006l-1.9.948a.75.75 0 0 1-.959-.255l-.503-.763a.75.75 0 0 0-1.248 0l-.509.763a.75.75 0 0 1-.959.255l-1.897-.948A.751.751 0 0 0 7.08 2.16l1.41 2.82"/><path d="m7.237 10.5l-2.76 3.2a5.932 5.932 0 0 0 4.7 9.549h5.79a5.932 5.932 0 0 0 4.7-9.549l-2.76-3.2"/></g></svg>
+            <svg className='w-12 h-12' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"
+              strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M13.574 12.75h-2.033a1.342 1.342 0 0 0-.5
+              2.587l2.064.826a1.342 1.342 0 0 1-.5 2.587h-2.031m1.5-6V12m0 7.5v-.75m-5.25-10.5h10.5M15.63 5.036l1.438-2.876a.75.75 0 0
+              0-1.006-1.006l-1.9.948a.75.75 0 0 1-.959-.255l-.503-.763a.75.75 0 0 0-1.248 0l-.509.763a.75.75 0 0 1-.959.255l-1.897-.948A.751.751
+              0 0 0 7.08 2.16l1.41 2.82"/><path d="m7.237 10.5l-2.76 3.2a5.932 5.932 0 0 0 4.7 9.549h5.79a5.932 5.932 0 0 0 4.7-9.549l-2.76-3.2"/>
+            </g></svg>
             <span className="font-medium">ISR</span>
           </button>
         </div>
         <div className="flex justify-center">
           <button
-            className="flex flex-col items-center justify-center px-4 py-6
-            rounded-lg text-gray-600 bg-gray-200 hover:bg-gray-300
-            shadow-md transition-all max-h-[120px] w-48"
+            className="flex flex-col items-center justify-center px-4 py-6 rounded-lg text-gray-600 bg-gray-200
+              hover:bg-gray-300 border-2 border-[#848484] transition-all max-h-[120px] w-48 cursor-not-allowed" disabled
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512" fill="none">
               <path d="M271.06 144.3L325.33 158.6C329.88 159.79 332 162.73 332 166.7C332 170.87 328.49 174 324.24 174H288.64C281.88 174 275.3 170.55 270.77

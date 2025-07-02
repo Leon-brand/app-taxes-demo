@@ -27,7 +27,7 @@ const Home = () => {
     <>
       <WelcomeModal isOpen={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} />
       <div className="min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-14">
-        <div className="flex justify-between items-start w-full mb-8">
+        <div className="flex justify-between items-start w-full mb-2">
           <div>
             <h1 className="text-3xl font-bold text-[#143559]">Bienvenido</h1>
           </div>
@@ -37,36 +37,36 @@ const Home = () => {
           </div>
         </div>
         <div className="bg-white rounded-xl p-6 w-full max-w-3xl shadow-sm">
-          <h2 className="text-xl font-bold text-[#143559] mb-6">Selecciona tu operación</h2>
-          <div className="grid grid-cols-3 gap-6">
+          <h2 className="text-xl font-bold text-[#143559] mb-4">Selecciona tu operación</h2>
+          <div className="grid grid-cols-3 gap-5">
             <button className="flex flex-col items-center justify-center px-4 py-6
-                      border rounded-lg text-gray-600 bg-gray-100 hover:bg-gray-200
-                      transition-all max-h-[120px] cursor-not-allowed" disabled>
+                      border-2 border-[#848484] rounded-lg text-gray-500 bg-gray-100 hover:bg-gray-200
+                      transition-all max-h-[120px] cursor-not-allowed" disabled title='Previos'>
               <MessageSquareReply size={70} />
               <span className="font-medium">Previos</span>
             </button>
             <button
               onClick={() => setShowModalDeterminar(true)}
-              className="flex flex-col items-center justify-center px-4 py-6 rounded-lg
-                      text-white bg-[#143559] shadow hover:bg-[#0077FF] transition-all max-h-[120px]"
+              className="flex flex-col items-center justify-center px-4 py-6 rounded-lg text-white bg-[#143559]
+                shadow-[3px_6px_8px_-1px_rgba(20,53,89,0.5)] hover:bg-[#0077FF] transition-all max-h-[120px]"
             >
               <Target size={50} />
               <span className="font-medium">Determinar</span>
             </button>
-            <button className="flex flex-col items-center justify-center px-4 py-6 border rounded-lg
-                      text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] cursor-not-allowed" disabled>
+            <button className="flex flex-col items-center justify-center px-4 py-6 border-2 border-[#848484] rounded-lg
+                      text-gray-500 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] cursor-not-allowed" disabled title='Auditar'>
               <Search size={50} />
               <span className="font-medium">Auditar</span>
             </button>
-            <button className="flex flex-col items-center justify-center px-4 py-2 border rounded-lg
-                      text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] cursor-not-allowed" disabled>
+            <button className="flex flex-col items-center justify-center px-4 py-2 border-2 border-[#848484] rounded-lg
+                      text-sm text-gray-500 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] cursor-not-allowed" disabled title='Control de Obligaciones'>
               <ListTodo size={48} />
               <span className="font-medium text-center">Control de<br />Obligaciones</span>
             </button>
             <button
               onClick={() => navigate('/boveda-home')}
-              className="flex flex-col items-center justify-center px-2 py-3 rounded-lg
-                      text-white bg-[#143559] shadow hover:bg-[#0077FF] transition-all max-h-[120px]">
+              className="flex flex-col items-center justify-center px-2 py-3 rounded-lg text-white bg-[#143559]
+                shadow-[3px_6px_8px_-1px_rgba(20,53,89,0.5)] hover:bg-[#0077FF] transition-all max-h-[120px]">
               <svg xmlns="http://www.w3.org/2000/svg" width="56" height="54" viewBox="0 0 24 24"><path
                 fill="currentColor" d="M12.75 9a.75.75 0 0 0-1.5 0v.354q-.32.09-.604.252a.75.75 0 0 0-1.04
                 1.04a2.7 2.7 0 0 0-.252.604H9a.75.75 0 0 0 0 1.5h.354q.09.32.252.604a.75.75 0 0 0
@@ -91,14 +91,14 @@ const Home = () => {
 
               <span className="font-medium text-center">Bóveda Fiscal</span>
             </button>
-            <button className="flex flex-col items-center justify-center px-4 py-6 border rounded-lg
-                      text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] cursor-not-allowed" disabled>
+            <button className="flex flex-col items-center justify-center px-4 py-6 border-2 border-[#848484] rounded-lg
+                      text-gray-500 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] cursor-not-allowed" disabled title='Contrapartes'>
               <Handshake size={50} />
               <span className="font-medium">Contrapartes</span>
             </button>
             <div className="col-span-3 flex justify-center">
-              <button className="flex flex-col items-center justify-center px-4 py-6 border rounded-lg
-                        text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] w-1/3 cursor-not-allowed" disabled onClick={() => setShowModalDeterminar(true)} title="Conciliaciones">
+              <button className="flex flex-col items-center justify-center px-4 py-6 border-2 border-[#848484] rounded-lg
+                        text-gray-500 bg-gray-100 hover:bg-gray-200 transition-all max-h-[120px] w-1/3 cursor-not-allowed" disabled title="Conciliaciones">
                 <Link size={50} />
                 <span className="font-medium">Conciliaciones</span>
               </button>

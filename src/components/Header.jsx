@@ -1,10 +1,13 @@
 import RFCDropdownButton from './RFCDropdownButton'
 import { useState, useRef, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
   const [rfc, setRFC] = useState('ABYZ990099')
   const [showUserMenu, setShowUserMenu] = useState(false)
   const dropdownRef = useRef(null)
+
+  const navigate = useNavigate()
 
   const optionsRFC = [
     { value: 'ABYZ99009', label: 'RFC: ABYZ99009' },
@@ -41,16 +44,27 @@ const Header = () => {
 
   return (
     <header className="bg-[#143559] text-white p-0 fixed w-full top-0 z-50 min-h-12 h-[70px] flex justify-between items-stretch">
-      <img
+{/*       <img
         src="./logoTransparente.png"
         alt="Logo"
         className="ml-8 my-2 object-contain"
-      />
-
-      <div ref={dropdownRef} className="flex justify-end items-stretch mr-4 relative">
-        <button
-          className="bg-[#143559] hover:bg-[#1a4473] hover:underline text-white px-4 transition duration-300 h-full"
-        >
+      /> */}
+      <button
+        onClick={() => navigate('/')}
+        className="ml-8 mb-8 h-full flex items-center hover:bg-[#1a4473] transition duration-300"
+        aria-label="Ir a la página de inicio"
+      >
+        <img
+          src="./logoTransparente.png"
+          alt="Logo de Intelitax"
+          className="h-14 w-auto object-contain"
+        />
+      </button>
+      <div
+        ref={dropdownRef}
+        className="flex justify-end items-stretch mr-4 relative"
+      >
+        <button className="bg-[#143559] hover:bg-[#1a4473] hover:underline text-white px-4 transition duration-300 h-full">
           Cargar Archivos
         </button>
         <button
@@ -60,20 +74,30 @@ const Header = () => {
           Mi Intelitax
         </button>
         {showUserMenu && (
-          <div
-            className="absolute right-0 top-full mt-2 w-56 bg-[#e6f0fa] text-[#143559] rounded-lg shadow-lg overflow-hidden z-50"
-          >
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">Mensajes</button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">Mis Empresas</button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">e.Firma</button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">Cuentas Bancarias</button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">Reglas de Clasificación</button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">Ajustes</button>
+          <div className="absolute right-0 top-full mt-2 w-56 bg-[#e6f0fa] text-[#143559] rounded-lg shadow-lg overflow-hidden z-50">
+            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+              Mensajes
+            </button>
+            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+              Mis Empresas
+            </button>
+            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+              e.Firma
+            </button>
+            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+              Cuentas Bancarias
+            </button>
+            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+              Reglas de Clasificación
+            </button>
+            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+              Ajustes
+            </button>
             <button
               onClick={handleLogout}
               className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 font-semibold"
             >
-            Cerrar Sesión
+              Cerrar Sesión
             </button>
           </div>
         )}
@@ -82,12 +106,11 @@ const Header = () => {
           options={optionsRFC}
           selectedRFC={rfc}
           onSelect={(newRFC) => {
-            setRFC(newRFC)
+            setRFC(newRFC);
           }}
         />
       </div>
     </header>
-
   )
 }
 

@@ -6,7 +6,8 @@ import RequestPageOutlinedIcon from '@mui/icons-material/RequestPageOutlined'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined'
 //import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SystemUpdateAltOutlinedIcon from '@mui/icons-material/SystemUpdateAltOutlined'
-import { se } from 'date-fns/locale'
+
+//import { se } from 'date-fns/locale'
 
 const CFDIsPage = () => {
   const [selectedRFC, setSelectedRFC] = useState('')
