@@ -1,8 +1,13 @@
 import RFCDropdownButton from './RFCDropdownButton'
+import ModalCloseSession from './ModalCloseSession'
+
 import { useState, useRef, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Mail, Building, Signature, IdCard, SlidersVertical, Settings, DoorOpen } from 'lucide-react'
+
 const Header = () => {
+  const [ showModalCloseSession, setShowModalCloseSession ] = useState(false)
   const [rfc, setRFC] = useState('ABYZ990099')
   const [showUserMenu, setShowUserMenu] = useState(false)
   const dropdownRef = useRef(null)
@@ -44,11 +49,6 @@ const Header = () => {
 
   return (
     <header className="bg-[#143559] text-white p-0 fixed w-full top-0 z-50 min-h-12 h-[70px] flex justify-between items-stretch">
-{/*       <img
-        src="./logoTransparente.png"
-        alt="Logo"
-        className="ml-8 my-2 object-contain"
-      /> */}
       <button
         onClick={() => navigate('/')}
         className="ml-8 mb-8 h-full flex items-center hover:bg-[#1a4473] transition duration-300"
@@ -74,29 +74,44 @@ const Header = () => {
           Mi Intelitax
         </button>
         {showUserMenu && (
-          <div className="absolute right-0 top-full mt-2 w-56 bg-[#e6f0fa] text-[#143559] rounded-lg shadow-lg overflow-hidden z-50">
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+          <div className="absolute right-4 top-full mt-0 w-56 bg-[#e6f0fa] text-[black] text-sm rounded-lg shadow-lg overflow-hidden z-50">
+            <button className="flex w-full text-left px-2 py-3 hover:font-bold hover:underline transition-all duration-700">
+              <Mail size={20} className='mr-2'/>
               Mensajes
             </button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+            {/*             <button className="flex w-full text-left px-2 py-3 items-center">
+              <Mail size={20} className="mr-2" />
+              <span className="transition-all duration-300 hover:underline hover:font-semibold hover:text-[15px]">
+                Mensajes
+              </span>
+            </button> */}
+            <button className="flex w-full text-left px-2 py-3 hover:font-bold hover:underline transition-all duration-500">
+              <Building size={20} className='mr-2'/>
               Mis Empresas
             </button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+            <button className="flex w-full text-left px-2 py-3 hover:font-bold hover:underline transition-all duration-500">
+              <Signature size={20} className='mr-2'/>
               e.Firma
             </button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+            <button className="flex w-full text-left px-2 py-3 hover:font-bold hover:underline transition-all duration-500">
+              <IdCard size={20} className='mr-2'/>
               Cuentas Bancarias
             </button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+            <button className="flex w-full text-left px-2 py-3 hover:font-bold hover:underline transition-all duration-500">
+              <SlidersVertical size={20} className='mr-2'/>
               Reglas de Clasificación
             </button>
-            <button className="w-full text-left px-4 py-3 hover:bg-[#dbe9f5]">
+            <button className="flex w-full text-left px-2 py-4 border-0 hover:font-bold hover:underline transition-all duration-500 "
+              style={{ borderBottom: '1px solid rgba(20, 53, 89, 0.2)', borderTop: '0.5px solid rgba(20, 53, 89, 0.2)' }}
+            >
+              <Settings size={20} className='mr-2'/>
               Ajustes
             </button>
             <button
               onClick={handleLogout}
-              className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 font-semibold"
+              className="flex w-full text-left px-2 py-5 text-red-600 hover:font-bold hover:underline transition-all duration-500"
             >
+              <DoorOpen size={20} className='mr-2'/>
               Cerrar Sesión
             </button>
           </div>
@@ -106,7 +121,7 @@ const Header = () => {
           options={optionsRFC}
           selectedRFC={rfc}
           onSelect={(newRFC) => {
-            setRFC(newRFC);
+            setRFC(newRFC)
           }}
         />
       </div>

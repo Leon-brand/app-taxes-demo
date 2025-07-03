@@ -21,8 +21,8 @@ const RFCDropdownButton = ({ options = [], onSelect }) => {
       {/* Botón principal */}
       <button
         onClick={() => setOpen(!open)}
-        className={`flex flex-col items-center mt-3 px-2 py-1 w-[113px] rounded-2xl text-sm transition 
-            ${open ? 'bg-[#F2F5F6] text-[#143559]' : 'bg-[#0077FF] text-white'}`}
+        className={`flex flex-col items-center mt-3 px-2 py-1 w-[113px] rounded-2xl text-sm transition-all duration-300
+            ${open ? 'bg-[#F2F5F6] text-[#143559]' : 'bg-[#0077FF] text-white'} hover:bg-[#F2F5F6] hover:text-[#143559]`}
       >
         <GroupsOutlinedIcon fontSize="medium" className="leading-none m-0 p-0" />
         <span className="text-sm leading-none m-0 p-0">RFC</span>

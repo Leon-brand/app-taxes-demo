@@ -46,7 +46,7 @@ const SidebarIVA = ({ onSelectTab, activeTab }) => {
                 <button
                   key={index}
                   onClick={() => onSelectTab(index)}
-                  className={`block w-full text-left px-4 py-2 font-medium rounded transition duration-200 whitespace-nowrap overflow-hidden text-ellipsis ${
+                  className={`flex w-full text-left px-4 py-2 font-medium rounded transition duration-200 whitespace-nowrap overflow-hidden text-ellipsis ${
                     activeTab === index
                       ? 'text-blue-500'
                       : 'hover:bg-[#143559] hover:text-white'
