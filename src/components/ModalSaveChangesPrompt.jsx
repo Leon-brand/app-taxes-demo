@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import { DoorOpen } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Save, CircleX } from 'lucide-react'
 
-const ModalCloseSession = ({ isOpen, onClose }) => {
+const ModalSaveChangesPrompt = ({ isOpen, onClose }) => {
   const [showModal, setShowModal] = useState(false) //  Controla visibilidad real del DOM
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleEsc = (e) => e.key === 'Escape' && onClose()  // Si se presiona Escape, cerrar el modal
@@ -21,15 +24,19 @@ const ModalCloseSession = ({ isOpen, onClose }) => {
 
   if (!isOpen && !showModal) return null // Espera a ocultar el DOM después de animar
 
-  /**
-   * Función para cerrar sesión, remueve el indicador de autenticación en localStorage
-   * y redirige a la página de login.
-   */
-  const handleLogout = () => {
-    localStorage.removeItem('auth')
-    localStorage.removeItem('hasSeenWelcomeModal')
-    //sessionStorage.clear
-    window.location.replace('/login')//prevenir navegación hacia atrás
+  const handleExitWithoutSaving = () => {
+    onClose()
+    setTimeout(() => {
+      navigate('/', { replace: true })
+    }, 100)
+  }
+
+  const handleSaveAndExit = () => {
+    onClose()
+    setTimeout(() => {
+      alert('Progreso guardado')
+      navigate('/', { replace: true })
+    }, 200)
   }
 
   return (
@@ -40,36 +47,35 @@ const ModalCloseSession = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="relative bg-[#F2F5F6] rounded-xl border-2 border-[#143559] shadow-2xl p-4 w-full max-w-md relative"
+        className="relative bg-[#F2F5F6] rounded-xl border-2 border-[#143559] shadow-2xl p-6 w-full max-w-[600px] relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-2xl font-bold text-[#143559] mb-4 text-center">Estas Cerrando sesión</h2>
+        <h2 className="text-2xl font-bold text-[#143559] mb-4 text-center">Estas saliendo de la pantalla de trabajo</h2>
 
-        <p className="text-[#143559] mb-6 mt-6 text-center">
-          ¿Estás seguro?
+        <p className="text-[#143559] mb-8 mt-8 text-center">
+          Si sales de esta pantalla sin guardar tu progreso se perderá tu trabajo.
         </p>
-        <div className='flex block justify-center gap-4'>
+        <p className='text-[#143559] font-bold mb-6 mt-6 text-center'>
+           ¿Quieres guardar cambios antes de salir?
+        </p>
+        <div className='flex block justify-center gap-6'>
           <button
             className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
                   text-[#143559] text-md font-bold transition-all duration-300 border-[#143559]
                   w-[160px] h-[56px] justify-center hover:bg-[#143559] hover:text-white"
-            onClick={onClose}
+            onClick={ handleSaveAndExit }
           >
-            <svg className='w-8 h-8 mr-1' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M10 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4m0-6a2 2 0 1 1 0 4c-1.11 0-2-.89-2-2s.9-2 2-2m2 14H2v-3c0-2.67 5.33-4 8-4c1 0 2.38.19 3.71.56c-.3.56-.48 1.18-.5 1.83c-.98-.29-2.1-.49-3.21-.49c-2.97 0-6.1 1.46-6.1 2.1v1.1H12z"/>
-              <circle cx="18" cy="18.5" r="4" />
-            </svg>
-
-          Permanecer
+            <Save size={36} className='ml-2 mr-0' />
+            <span className="leading-tight">Guardar Cambios</span>
           </button>
           <button
             className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
                   text-red-600 text-md font-bold transition-all duration-300 border-red-600
                   w-[160px] h-[56px] justify-center hover:bg-red-600 hover:text-white"
-            onClick={handleLogout}
+            onClick={ handleExitWithoutSaving }
           >
-            <DoorOpen className="w-8 h-8 mr-1" />
-          Cerrar Sesión
+            <CircleX size={36} className='ml-2 mr-0' />
+            <span className="leading-tight">Salir sin Guardar</span>
           </button>
         </div>
 
@@ -78,9 +84,9 @@ const ModalCloseSession = ({ isOpen, onClose }) => {
   )
 }
 
-export default ModalCloseSession
+export default ModalSaveChangesPrompt
 
-ModalCloseSession.propTypes = {
+ModalSaveChangesPrompt.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 }

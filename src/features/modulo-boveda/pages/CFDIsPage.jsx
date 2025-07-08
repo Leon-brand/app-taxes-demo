@@ -1,4 +1,5 @@
 import SidebarBoveda from '../components/SidebarBoveda'
+import ModalConfiguracionColumnas from '../components/ModalConfiguracionColumnas'
 import CustomDropDown from '@/components/CustomeDropDown'
 import { useState, useEffect } from 'react'
 
@@ -6,8 +7,7 @@ import RequestPageOutlinedIcon from '@mui/icons-material/RequestPageOutlined'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined'
 //import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SystemUpdateAltOutlinedIcon from '@mui/icons-material/SystemUpdateAltOutlined'
-
-//import { se } from 'date-fns/locale'
+import { SlidersVertical } from 'lucide-react'
 
 const CFDIsPage = () => {
   const [selectedRFC, setSelectedRFC] = useState('')
@@ -15,7 +15,23 @@ const CFDIsPage = () => {
   const [ selectedMonth, setSelectedMonth] = useState('')
   const [ selectedCharacter, setSelectedCharacter] = useState('')
   const [ selectedType, setSelectedType] = useState('')
+  const [ showModalConfigColumnas , setShowModalConfigColumnas] = useState(false)
   const [ showTable, setShowTable] = useState(false)
+
+  const columnasDisponibles = [
+    'UUID/Clave',
+    'Mes de Emisión',
+    'RFC Emisor',
+    'RFC Receptor',
+    'Razón social del Emisor',
+    'Razón social del Receptor',
+    'Tipo de Comprobante',
+    'Fecha de Cancelación',
+    'Método de pago',
+    'Retenciones',
+    'Régimen Fiscal',
+    'Categoría de Producto o Servicio',
+  ]
 
   const optionsRFC = [
     { value: 'ABYZ99009', label: 'ABYZ99009' },
@@ -75,27 +91,31 @@ const CFDIsPage = () => {
 
   return (
     <div className="flex w-full">
-      <SidebarBoveda/>
+      <SidebarBoveda />
       <div className="w-full min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-14">
         <div className="flex justify-between w-full mb-2">
           <div className="flex items-center gap-2">
             <h1 className="text-3xl font-bold">Bóveda Fiscal - CFDIs</h1>
           </div>
           <div>
-            <RequestPageOutlinedIcon style={{ fontSize: 58 }} alt="CFDIs" titleAccess='CFDIs' />
+            <RequestPageOutlinedIcon
+              style={{ fontSize: 58 }}
+              alt="CFDIs"
+              titleAccess="CFDIs"
+            />
           </div>
         </div>
-        <div className='flex flex-col w-full'>
+        <div className="flex flex-col w-full">
           <div className="flex gap-3 mb-2">
             <CustomDropDown
-              className='w-[160px] h-[28px] text-center justify-center'
+              className="w-[160px] h-[28px] text-center justify-center"
               placeholder="RFC"
               data={optionsRFC}
               value={selectedRFC}
               onChange={setSelectedRFC}
             />
             <CustomDropDown
-              className='w-[160px] h-[28px] text-center justify-center'
+              className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Año"
               data={optionsYear}
               value={selectedYear}
@@ -103,7 +123,7 @@ const CFDIsPage = () => {
               disabled={!selectedRFC}
             />
             <CustomDropDown
-              className='w-[160px] h-[28px] text-center justify-center'
+              className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Mes"
               data={optionsMonth}
               value={selectedMonth}
@@ -111,7 +131,7 @@ const CFDIsPage = () => {
               disabled={!selectedYear}
             />
             <CustomDropDown
-              className='w-[160px] h-[28px] text-center justify-center'
+              className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Cáracter"
               data={optionsCharacter}
               value={selectedCharacter}
@@ -119,24 +139,38 @@ const CFDIsPage = () => {
               disabled={!selectedMonth}
             />
             <CustomDropDown
-              className='w-[160px] h-[28px] text-center justify-center'
+              className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Tipo de CFDI"
               data={optionsType}
               value={selectedType}
-              /* onChange={setSelectedType} */
-              onChange={(value) => {
-                setSelectedType(value)
-                // Verifica que todos los anteriores estén llenos
-                if (selectedRFC && selectedYear && selectedMonth && selectedCharacter && value) {
-                  setShowTable(true)
-                } else {
-                  setShowTable(false) // Por si retrocede
-                }
-              }}
+              onChange={setSelectedType}
               disabled={!selectedCharacter}
             />
+            <button
+              disabled={!selectedType}
+              className={`flex items-center ml-4 px-2 py-1 rounded-md text-sm transition-all duration-300 
+              w-[180px] h-[32px] justify-center
+              ${
+    selectedType === ''
+      ? 'cursor-not-allowed bg-gray-200 text-gray-400'
+      : 'cursor-pointer bg-[#F2F5F6] text-[#143559] shadow-[0_4px_12px_rgba(20,53,89,0.3)] hover:bg-[#143559] hover:text-white'
+    }`}
+              /*             onClick={() => {
+              if (selectedRFC && selectedYear && selectedMonth && selectedCharacter) {
+                setShowTable(true)
+              } else {
+                setShowTable(false)
+              }
+            }} */
+              onClick={() => setShowModalConfigColumnas(true)}
+            >
+              <SlidersVertical size={20} className="mr-2" />
+              Configurar Tabla
+            </button>
           </div>
-          <h2 className="text-xl text-left font-bold text-[#143559] mb-2">Buscador</h2>
+          <h2 className="text-xl text-left font-bold text-[#143559] mb-2">
+            Buscador
+          </h2>
           {showTable ? (
             <div className="bg-white rounded-lg p-0 w-full max-w-6xl h-80 shadow-md overflow-auto">
               <table className="table-auto w-full h-full border-collapse">
@@ -164,25 +198,30 @@ const CFDIsPage = () => {
             <div className="bg-white rounded-lg border border-[#143559] p-4 w-full max-w-6xl h-80 shadow-md" />
           )}
           <div className="flex justify-between gap-10 mt-6 max-w-6xl">
-            <button className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
+            <button
+              className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
                   text-sm text-[#337AB7] transition-all duration-300 border-[#337AB7]
                   w-[140px] justify-center hover:bg-[#337AB7] hover:text-white"
             >
-              <PlagiarismOutlinedIcon fontSize="large"/>
-            Historial de Descargas
+              <PlagiarismOutlinedIcon fontSize="large" />
+              Historial de Descargas
             </button>
-            <button className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
+            <button
+              className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
                   text-md font-bold transition-all duration-300 border-[#143559]
                   w-[220px] justify-center hover:bg-[#143559] hover:text-white"
             >
               Descarga CSV
-              <SystemUpdateAltOutlinedIcon fontSize="large"  className='ml-4'/>
-          
+              <SystemUpdateAltOutlinedIcon fontSize="large" className="ml-4" />
             </button>
           </div>
         </div>
-
       </div>
+      <ModalConfiguracionColumnas
+        isOpen={showModalConfigColumnas}
+        onClose={() => setShowModalConfigColumnas(false)}
+        columnasDisponibles={columnasDisponibles}
+      />
     </div>
   )
 }

@@ -1,0 +1,109 @@
+import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import { Check, Square } from 'lucide-react'
+import { Save, XCircle } from 'lucide-react'
+
+const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] }) => {
+  //const [seleccionadas, setSeleccionadas] = useState(initialSelected)
+
+/*   useEffect(() => {
+    if (isOpen) {
+      setSeleccionadas(initialSelected)
+    }
+  }, [isOpen, initialSelected]) */
+
+  const [seleccionadas, setSeleccionadas] = useState([]) // Solo para probar selección visual
+
+
+  // Esta función actualiza el array de columnas seleccionadas.
+  // Si la columna ya está seleccionada, la quita. Si no, la añade.
+  const toggleColumna = (columna) => {
+    setSeleccionadas((prev) =>
+      prev.includes(columna)
+        ? prev.filter((c) => c !== columna)// La quita si ya está
+        : [...prev, columna]// La agrega si no está
+    )
+  }
+
+  if (!isOpen) return null
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-[#F2F5F6] border-2 border-[#143559] shadow-2xl rounded-xl p-6 w-full max-w-lg relative"
+        onClick={(e) => e.stopPropagation()}// Previene que el click dentro del modal lo cierre
+        role="dialog"
+        aria-modal="true"
+      >
+        <h2 className="text-2xl font-bold text-[#143559] text-center mb-2">Configuración de Tabla</h2>
+        <p className="text-center text-sm text-[#143559] mb-6">
+          Selecciona las columnas que quieras visualizar en la tabla.
+        </p>
+
+        {/* Renderiza checkboxes para cada columna del array que recibimos por props */}
+        <div className="grid grid-cols-2 gap-y-4 gap-x-8 mb-8 px-4">
+          {columnasDisponibles.map((columna) => {
+            const checked = seleccionadas.includes(columna)
+            return (
+              <label
+                key={columna}
+                className="flex items-center cursor-pointer text-[#143559] text-sm font-medium"
+              >
+                {/* Checkbox invisible, funcional */}
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggleColumna(columna)}
+                  className="hidden"
+                />
+                {/* Icono visual que actúa como checkbox */}
+                <span className="mr-2">
+                  {checked ? (
+                    <span className="w-5 h-5 flex items-center justify-center bg-[#143559] rounded-sm">
+                      <Check size={16} className="text-white" />
+                    </span>
+                  ) : (
+                    <Square size={20} className="text-[#143559]" />
+                  )}
+                </span>
+                {columna}
+              </label>
+            )
+          })}
+        </div>
+
+        <div className="flex justify-center gap-6">
+          <button
+            className="flex items-center gap-2 border-2 border-[#143559] text-[#143559] font-bold text-sm rounded-md px-4 py-2
+            hover:bg-[#143559] hover:text-white transition-all duration-300"
+            onClick={() => onSave(seleccionadas)}
+          >
+            <Save size={20} />
+            Guardar Cambios
+          </button>
+
+          <button
+            className="flex items-center gap-2 border-2 border-red-600 text-red-600 font-bold text-sm rounded-md px-4 py-2
+            hover:bg-red-600 hover:text-white transition-all duration-300"
+            onClick={onClose}
+          >
+            <XCircle size={20} />
+            Descartar Cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+ModalConfiguracionColumnas.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  //onSave: PropTypes.func.isRequired,
+  columnasDisponibles: PropTypes.arrayOf(PropTypes.string),
+}
+
+export default ModalConfiguracionColumnas

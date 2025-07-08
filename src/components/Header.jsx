@@ -1,18 +1,21 @@
 import RFCDropdownButton from './RFCDropdownButton'
 import ModalCloseSession from './ModalCloseSession'
+import ModalSaveChangesPrompt from './ModalSaveChangesPrompt'
 
 import { useState, useRef, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 
-import { Mail, Building, Signature, IdCard, SlidersVertical, Settings, DoorOpen } from 'lucide-react'
+import { Mail, Building, Signature, IdCard, SlidersVertical, Settings, DoorOpen, Save } from 'lucide-react'
+
 
 const Header = () => {
+  const [showModalSaveChangesPrompt, setShowModalSaveChangesPrompt] = useState(false)
   const [ showModalCloseSession, setShowModalCloseSession ] = useState(false)
   const [rfc, setRFC] = useState('ABYZ990099')
   const [showUserMenu, setShowUserMenu] = useState(false)
   const dropdownRef = useRef(null)
 
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   const optionsRFC = [
     { value: 'ABYZ99009', label: 'RFC: ABYZ99009' },
@@ -36,21 +39,10 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  /**
-   * Función para cerrar sesión, remueve el indicador de autenticación en localStorage
-   * y redirige a la página de login.
-   */
-  const handleLogout = () => {
-    localStorage.removeItem('auth')
-    localStorage.removeItem('hasSeenWelcomeModal')
-    //sessionStorage.clear
-    window.location.replace('/login')//prevenir navegación hacia atrás
-  }
-
   return (
     <header className="bg-[#143559] text-white p-0 fixed w-full top-0 z-50 min-h-12 h-[70px] flex justify-between items-stretch">
       <button
-        onClick={() => navigate('/')}
+        onClick={() => setShowModalSaveChangesPrompt(true)}
         className="ml-8 mb-8 h-full flex items-center hover:bg-[#1a4473] transition duration-300"
         aria-label="Ir a la página de inicio"
       >
@@ -79,12 +71,6 @@ const Header = () => {
               <Mail size={20} className='mr-2'/>
               Mensajes
             </button>
-            {/*             <button className="flex w-full text-left px-2 py-3 items-center">
-              <Mail size={20} className="mr-2" />
-              <span className="transition-all duration-300 hover:underline hover:font-semibold hover:text-[15px]">
-                Mensajes
-              </span>
-            </button> */}
             <button className="flex w-full text-left px-2 py-3 hover:font-bold hover:underline transition-all duration-500">
               <Building size={20} className='mr-2'/>
               Mis Empresas
@@ -108,7 +94,7 @@ const Header = () => {
               Ajustes
             </button>
             <button
-              onClick={handleLogout}
+              onClick={() => setShowModalCloseSession(true)}
               className="flex w-full text-left px-2 py-5 text-red-600 hover:font-bold hover:underline transition-all duration-500"
             >
               <DoorOpen size={20} className='mr-2'/>
@@ -125,6 +111,8 @@ const Header = () => {
           }}
         />
       </div>
+      <ModalSaveChangesPrompt isOpen={showModalSaveChangesPrompt} onClose={() => setShowModalSaveChangesPrompt(false)} />
+      <ModalCloseSession isOpen={showModalCloseSession} onClose={() => setShowModalCloseSession(false)} />
     </header>
   )
 }
