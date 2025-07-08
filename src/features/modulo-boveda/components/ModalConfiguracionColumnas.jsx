@@ -1,19 +1,12 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { useEffect,useState } from 'react'
 import { Check, Square } from 'lucide-react'
-import { Save, XCircle } from 'lucide-react'
+import { CircleX, Columns3Cog } from 'lucide-react'
 
-const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] }) => {
+const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [], selectedColumns }) => {
   //const [seleccionadas, setSeleccionadas] = useState(initialSelected)
 
-/*   useEffect(() => {
-    if (isOpen) {
-      setSeleccionadas(initialSelected)
-    }
-  }, [isOpen, initialSelected]) */
-
   const [seleccionadas, setSeleccionadas] = useState([]) // Solo para probar selección visual
-
 
   // Esta función actualiza el array de columnas seleccionadas.
   // Si la columna ya está seleccionada, la quita. Si no, la añade.
@@ -23,6 +16,12 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] 
         ? prev.filter((c) => c !== columna)// La quita si ya está
         : [...prev, columna]// La agrega si no está
     )
+    console.log(seleccionadas)
+  }
+
+  const onSave = () => {
+    selectedColumns(seleccionadas)
+    onClose()
   }
 
   if (!isOpen) return null
@@ -42,8 +41,6 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] 
         <p className="text-center text-sm text-[#143559] mb-6">
           Selecciona las columnas que quieras visualizar en la tabla.
         </p>
-
-        {/* Renderiza checkboxes para cada columna del array que recibimos por props */}
         <div className="grid grid-cols-2 gap-y-4 gap-x-8 mb-8 px-4">
           {columnasDisponibles.map((columna) => {
             const checked = seleccionadas.includes(columna)
@@ -52,14 +49,12 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] 
                 key={columna}
                 className="flex items-center cursor-pointer text-[#143559] text-sm font-medium"
               >
-                {/* Checkbox invisible, funcional */}
                 <input
                   type="checkbox"
                   checked={checked}
                   onChange={() => toggleColumna(columna)}
                   className="hidden"
                 />
-                {/* Icono visual que actúa como checkbox */}
                 <span className="mr-2">
                   {checked ? (
                     <span className="w-5 h-5 flex items-center justify-center bg-[#143559] rounded-sm">
@@ -74,24 +69,24 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] 
             )
           })}
         </div>
-
-        <div className="flex justify-center gap-6">
+        <div className='flex block justify-center gap-6'>
           <button
-            className="flex items-center gap-2 border-2 border-[#143559] text-[#143559] font-bold text-sm rounded-md px-4 py-2
-            hover:bg-[#143559] hover:text-white transition-all duration-300"
+            className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
+                  text-[#143559] text-md font-bold transition-all duration-300 border-[#143559]
+                  w-[160px] h-[56px] justify-center hover:bg-[#143559] hover:text-white"
             onClick={() => onSave(seleccionadas)}
           >
-            <Save size={20} />
-            Guardar Cambios
+            <Columns3Cog size={38} className='ml-2 mr-0' />
+            <span className="leading-tight">Mostrar Tabla</span>
           </button>
-
           <button
-            className="flex items-center gap-2 border-2 border-red-600 text-red-600 font-bold text-sm rounded-md px-4 py-2
-            hover:bg-red-600 hover:text-white transition-all duration-300"
-            onClick={onClose}
+            className="flex items-center px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
+                  text-red-600 text-md font-bold transition-all duration-300 border-red-600
+                  w-[160px] h-[56px] justify-center hover:bg-red-600 hover:text-white"
+            onClick={ onClose }
           >
-            <XCircle size={20} />
-            Descartar Cambios
+            <CircleX size={48} className='ml-2 mr-0' />
+            <span className="leading-tight">Descartar Selección</span>
           </button>
         </div>
       </div>
@@ -102,6 +97,7 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [] 
 ModalConfiguracionColumnas.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  selectedColumns: PropTypes.func.isRequired,
   //onSave: PropTypes.func.isRequired,
   columnasDisponibles: PropTypes.arrayOf(PropTypes.string),
 }
