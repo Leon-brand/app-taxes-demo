@@ -105,18 +105,10 @@ const CFDIsPage = () => {
         </div>
         <div className="flex flex-col w-full">
           <div className={`flex gap-3 mt-4 ${showTable ? 'mb-6' : 'mb-12'}`}>
-            {/*  <CustomDropDown
-              className="w-[160px] h-[28px] text-center justify-center"
-              placeholder="RFC"
-              data={optionsRFC}
-              value={selectedRFC}
-              onChange={setSelectedRFC}
-              title="Selecciona un RFC para habilitar los demás filtros"
-            />{ !selectedRFC && ( <CircleIcon className="animate-ping text-[#0077FF]" style={{ fontSize: 10 }} /> )} */}
             <div className="relative inline-block">
               {!selectedRFC && (
                 <span className="absolute -top-3 -right-0 z-10">
-                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#0077FF] opacity-75"></span>
+                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
                 </span>
               )}
               <CustomDropDown
@@ -163,7 +155,7 @@ const CFDIsPage = () => {
             <div className="relative inline-block">
               {selectedType && !showTable && (
                 <span className="absolute -top-3 -right-0 z-10">
-                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#0077FF] opacity-75"></span>
+                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
                 </span>
               )}
               <button
