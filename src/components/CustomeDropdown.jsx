@@ -3,9 +3,9 @@ import { useState, useRef, useEffect } from 'react'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
-const CustomDropDown = ({ value, onChange, data=[], placeholder = 'Seleccione una opción', className = '', disabled=false }) => {
+const CustomeDropDown = ({ value, onChange, data=[], placeholder = 'Seleccione una opción', className = '', disabled=false }) => {
 
-  const selectedOption = data.find((opt) => opt.value === value)
+  const selectedOption = data.find((opt) => opt.value === value) || null
 
   const [open, setOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -26,14 +26,18 @@ const CustomDropDown = ({ value, onChange, data=[], placeholder = 'Seleccione un
   return (
     <div
       ref={dropdownRef}
-      className={`relative text-sm font-small ${className}`}
+      className={`relative text-sm font-normal ${className}`}
     >
       <div
         onClick={() => !disabled && setOpen(!open)}
         className={`flex items-center rounded overflow-hidden ${disabled ? 'cursor-not-allowed bg-gray-200 text-gray-400' : 'cursor-pointer bg-white'} shadow-sm h-full`}
+        title={selectedOption?.label ?? placeholder}
       >
-        <div className={`flex-grow px-2 border border-r-0 ${disabled ? 'border-gray-300' : 'border-[#CFE5FF]'} flex items-center justify-center h-full`}>
-          {selectedOption?.label || placeholder}
+        <div
+          className={`flex-grow px-2 border border-r-0 ${disabled ? 'border-gray-300' : 'border-[#CFE5FF]'} flex items-center justify-start h-full`}
+          style={{ color: selectedOption ? '#143559' : '#666666' }}
+        >
+          {selectedOption?.label ?? placeholder}
         </div>
         <div className={`${disabled ? 'bg-gray-300 text-gray-500' : 'bg-[#CFE5FF] text-[#337AB7]'} rounded-r-md flex items-center justify-center border h-full px-1`}>
           {open ? <KeyboardArrowUpIcon fontSize="small" /> : <KeyboardArrowDownIcon fontSize="small" />}
@@ -59,7 +63,7 @@ const CustomDropDown = ({ value, onChange, data=[], placeholder = 'Seleccione un
   )
 }
 
-CustomDropDown.propTypes = {
+CustomeDropDown.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(
@@ -73,4 +77,4 @@ CustomDropDown.propTypes = {
   disabled: PropTypes.bool
 }
 
-export default CustomDropDown
+export default CustomeDropDown

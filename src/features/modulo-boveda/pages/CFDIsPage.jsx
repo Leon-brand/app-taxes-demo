@@ -1,12 +1,11 @@
 import SidebarBoveda from '../components/SidebarBoveda'
 import ModalConfiguracionColumnas from '../components/ModalConfiguracionColumnas'
-import CustomDropDown from '@/components/CustomeDropDown'
+import CustomeDropDown from '@/components/CustomeDropDown'
 import { useState } from 'react'
 
 import RequestPageOutlinedIcon from '@mui/icons-material/RequestPageOutlined'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined'
 import SystemUpdateAltOutlinedIcon from '@mui/icons-material/SystemUpdateAltOutlined'
-import CircleIcon from '@mui/icons-material/Circle';
 import { SlidersVertical } from 'lucide-react'
 
 const CFDIsPage = () => {
@@ -111,7 +110,7 @@ const CFDIsPage = () => {
                   <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
                 </span>
               )}
-              <CustomDropDown
+              <CustomeDropDown
                 className="w-[160px] h-[28px] text-center justify-center"
                 placeholder="RFC"
                 title="Selecciona un RFC para habilitar los demás filtros"
@@ -120,7 +119,7 @@ const CFDIsPage = () => {
                 onChange={setSelectedRFC}
               />
             </div>
-            <CustomDropDown
+            <CustomeDropDown
               className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Año"
               data={optionsYear}
@@ -128,7 +127,7 @@ const CFDIsPage = () => {
               onChange={setSelectedYear}
               disabled={!selectedRFC}
             />
-            <CustomDropDown
+            <CustomeDropDown
               className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Mes"
               data={optionsMonth}
@@ -136,7 +135,7 @@ const CFDIsPage = () => {
               onChange={setSelectedMonth}
               disabled={!selectedYear}
             />
-            <CustomDropDown
+            <CustomeDropDown
               className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Cáracter"
               data={optionsCharacter}
@@ -144,7 +143,7 @@ const CFDIsPage = () => {
               onChange={setSelectedCharacter}
               disabled={!selectedMonth}
             />
-            <CustomDropDown
+            <CustomeDropDown
               className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Tipo de CFDI"
               data={optionsType}

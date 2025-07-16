@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useEffect,useState } from 'react'
+import { useState } from 'react'
 import { Check, Square } from 'lucide-react'
 import { CircleX, Columns3Cog } from 'lucide-react'
 

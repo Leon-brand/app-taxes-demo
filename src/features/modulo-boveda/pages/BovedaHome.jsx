@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Calculator, BanknoteArrowUp, Landmark, Scroll } from 'lucide-react'
+import { Calculator, Landmark, Scroll } from 'lucide-react'
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import RequestPageOutlinedIcon from '@mui/icons-material/RequestPageOutlined'
