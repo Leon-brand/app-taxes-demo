@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import CustomeDropDown from '@/components/CustomeDropDown'
 
 import Tooltip from '@mui/material/Tooltip'
-import { FilePlus, CircleX, FileUp  } from 'lucide-react'
+import { FilePlus, CircleX, FileUp, File  } from 'lucide-react'
 
 const ModalCargaArchivos = ({ isOpen, onClose }) => {
   const [ showModal, setShowModal ] = useState(false)
@@ -12,24 +12,23 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
   const [ selectedMonth, setSelectedMonth ] = useState('')
   const [ selectedType, setSelectedType] = useState('')
   const [ documentosCargados, setDocumentosCargados ] = useState([])
-  const [dragActive, setDragActive] = useState(false)
 
   const handleDrop = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    setDragActive(false)
 
     const files = Array.from(e.dataTransfer.files)
-    if (files.length > 0) {
-      setDocumentosCargados(prev => [...prev, ...files])
-      console.log('Archivos cargados:', files)
-    }
+    if (files.length > 0) setDocumentosCargados(prev => [...prev, ...files])
   }
-
-  const handleDrag = (e) => {
-    setDragActive(true)
+  const preventDefaults = (e) => {
     e.preventDefault()
     e.stopPropagation()
+  }
+
+  const exitAndResetValues = () => {//Resyeta los valores y cierra Modal
+    [setSelectedRFC, setSelectedYear, setSelectedMonth, setSelectedType].forEach(fn => fn(''))
+    setDocumentosCargados([])
+    onClose()
   }
 
   useEffect(() => {
@@ -82,10 +81,44 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
     { value: 'Contable', label: 'Contable' },
   ]
 
-  const exitAndResetValues = () => {//Resyeta los valores y cierra Modal
-    [setSelectedRFC, setSelectedYear, setSelectedMonth, setSelectedType].forEach(fn => fn(''))
-    onClose()
-  }
+  const itemsCarpetas = (
+    <>
+      {selectedRFC && (
+        <div className="flex items-center gap-2 mb-1">
+          <svg className="w-5 h-5 text-[#0077FF]" fill="currentColor" viewBox="0 0 24 24"> <path d="M10 4H2v16h20V6h-8l-2-2z" />
+          </svg>
+          {selectedRFC}
+        </div>
+      )}
+      {selectedYear && (
+        <div className="ml-2 flex items-center gap-2 mb-1">
+          <svg className="w-5 h-5 text-[#0077FF]" fill="currentColor" viewBox="0 0 24 24"
+          >
+            <path d="M10 4H2v16h20V6h-8l-2-2z" />
+          </svg>
+          {selectedYear}
+        </div>
+      )}
+      {selectedMonth && (
+        <div className="ml-3 flex items-center gap-2 mb-1">
+          <svg className="w-5 h-5 text-[#0077FF]" fill="currentColor" viewBox="0 0 24 24"
+          >
+            <path d="M10 4H2v16h20V6h-8l-2-2z" />
+          </svg>
+          {selectedMonth}
+        </div>
+      )}
+      {selectedType && (
+        <div className="ml-4 flex items-center gap-2 mb-1">
+          <svg className="w-5 h-5 text-[#0077FF]" fill="currentColor" viewBox="0 0 24 24"
+          >
+            <path d="M10 4H2v16h20V6h-8l-2-2z" />
+          </svg>
+          {selectedType}
+        </div>
+      )}
+    </>
+  )
 
   return (
     <div
@@ -102,73 +135,97 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
       >
         <h1 className="text-3xl font-bold">Carga de Archivos</h1>
         <div className="flex gap-4 mt-4 mb-4">
-          <CustomeDropDown
-            className="w-[160px] h-[28px] text-center justify-center"
-            placeholder="RFC"
-            data={optionsRFC}
-            value={selectedRFC}
-            onChange={setSelectedRFC}
-          />
-          <Tooltip
-            title="Agrega los archivos que deseas guardar"
-            placement="bottom"
-            slotProps={{
-              tooltip: {
-                sx: {
-                  bgcolor: '#143559',
-                  color: 'white',
-                  fontSize: '0.875rem',
-                  padding: '16px 24px',
-                  borderRadius: '8px',
-                },
-              },
-            }}
-          >
-            <div className="flex gap-4">
-              <CustomeDropDown
-                className="w-[160px] h-[28px] text-center justify-center"
-                placeholder="Año"
-                data={optionsYear}
-                value={selectedYear}
-                onChange={setSelectedYear}
-                disabled={!selectedRFC}
-              />
-              <CustomeDropDown
-                className="w-[160px] h-[28px] text-center justify-center"
-                placeholder="Mes"
-                data={optionsMonth}
-                value={selectedMonth}
-                onChange={setSelectedMonth}
-                disabled={!selectedYear}
-              />
-              <CustomeDropDown
-                className="w-[160px] h-[28px] text-center justify-center"
-                placeholder="Tipo de Archivo"
-                data={ArchiveType}
-                value={selectedType}
-                onChange={setSelectedType}
-                disabled={!selectedMonth}
-              />
-            </div>
-          </Tooltip>
+          <div className='relative'>
+            {!selectedRFC && (
+              <span className="absolute -top-3 -right-0 z-10">
+                <span className="inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
+              </span>
+            )}
+            <CustomeDropDown
+              className="w-[160px] h-[28px] text-center justify-center"
+              placeholder={optionsRFC[0].label}
+              data={optionsRFC}
+              value={selectedRFC}
+              onChange={setSelectedRFC}
+            />
+          </div>
+          <div className="flex gap-4">
+            <CustomeDropDown
+              className="w-[160px] h-[28px] text-center justify-center"
+              placeholder="Año"
+              data={optionsYear}
+              value={selectedYear}
+              onChange={setSelectedYear}
+              disabled={!selectedRFC}
+            />
+            <CustomeDropDown
+              className="w-[160px] h-[28px] text-center justify-center"
+              placeholder="Mes"
+              data={optionsMonth}
+              value={selectedMonth}
+              onChange={setSelectedMonth}
+              disabled={!selectedYear}
+            />
+            <CustomeDropDown
+              className="w-[160px] h-[28px] text-center justify-center"
+              placeholder="Tipo de Archivo"
+              data={ArchiveType}
+              value={selectedType}
+              onChange={setSelectedType}
+              disabled={!selectedMonth}
+            />
+          </div>
         </div>
         {/* Área de carga */}
         <div className="flex w-full max-w-4xl h-80 border border-[#143559] rounded-xl overflow-hidden shadow-lg bg-white">
-          {/* IZQUIERDA: Zona de arrastre */}
+
+          {/* IZQUIERDA: Estructura de carpetas y archivos */}
+          <div className="flex flex-col gap-1 p-4 w-1/2  border-r border-[#143559]
+                          text-[#143559] text-sm justify-between">
+            <div className='ml-2 mt-2'>
+              {itemsCarpetas   /* todos los iconos de las carpetas simulando ruta*/ }
+              {documentosCargados.length > 0 && (
+                <div className="ml-2 mt-2  overflow-y-auto max-h-[800px]">
+                  {documentosCargados.map((file, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <File size={20} className="mb-2"/>
+                      <span>{file.name}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {(selectedRFC || selectedYear || selectedMonth || selectedType || documentosCargados.length > 0) && (
+              <p className="mt-1 ml-0 text-xs text-gray-500 text-center">
+                Ruta de Carga
+              </p>
+            )}
+          </div>
+
+          {/* DERECHA: Zona de arrastre */}
           <div
-            className="flex flex-col border-r border-[#143559] items-center justify-center w-1/2 p-6"
-            onDragEnter={handleDrag}
-            onDragOver={handleDrag}
-            onDragLeave={handleDrag}
+            className={`flex flex-col items-center justify-center w-1/2 p-6 transition-all duration-300 ${
+              !selectedType ?
+                'cursor-not-allowed bg-gray-100 text-gray-400' :
+                'cursor-pointer bg-white text-[#143559]'
+            }`}
+            onDragEnter={preventDefaults}
+            onDragOver={preventDefaults}
+            onDragLeave={preventDefaults}
             onDrop={handleDrop}
           >
-            <div className="flex flex-col items-center text-[#143559] cursor-pointer">
+            <div
+              className={`flex flex-col items-center relative ${
+                !selectedType ? 'text-gray-400' : 'text-[#143559]'
+              }`}
+            >
+              {selectedType && documentosCargados.length === 0 && (
+                <span className="absolute -top-5 z-10">
+                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
+                </span>
+              )}
               <FilePlus size={50} className="mb-4" />
-              <p className="text-lg font-medium text-center">
-                Arrastra tus archivos para
-                <br />
-                realizar la carga.
-              </p>
               <input
                 type="file"
                 multiple
@@ -181,95 +238,43 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
                 className="hidden"
                 id="fileUpload"
               />
-
-              <label
-                htmlFor="fileUpload"
-                className="mt-4 text-sm text-blue-600 underline cursor-pointer hover:text-blue-800"
-              >
-                Seleccionar archivos desde tu equipo
-              </label>
+              {!selectedRFC || !selectedYear || !selectedMonth || !selectedType ? (
+                <Tooltip
+                  title="Seleccione todos los campos para realizar la carga"
+                  placement="bottom"
+                  slotProps={{
+                    tooltip: {
+                      sx: {
+                        bgcolor: '#143559',
+                        color: 'white',
+                        fontSize: '0.875rem',
+                        padding: '28px 28px',
+                        borderRadius: '8px',
+                        maxWidth: '600px',
+                      },
+                    },
+                  }}
+                >
+                  <label
+                    htmlFor={( selectedType ) ? 'fileUpload' : ''}
+                    className={`text-lg font-medium text-center ${selectedType ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                  >
+                    Arrastra tus archivos para
+                    <br />
+                    realizar la carga.
+                  </label>
+                </Tooltip>
+              ) : (
+                <label
+                  htmlFor={( selectedType ) ? 'fileUpload' : ''}
+                  className={`text-lg font-medium text-center ${selectedType ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                >
+                  Arrastra tus archivos para
+                  <br />
+                realizar la carga.
+                </label>
+              )}
             </div>
-          </div>
-
-          {/* DERECHA: Estructura de carpetas y archivos */}
-          <div className="flex flex-col gap-2 mt-6 p-6 w-1/2 text-[#143559] text-sm">
-            {selectedRFC && (
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-[#0077FF]"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 4H2v16h20V6h-8l-2-2z" />
-                </svg>
-                {selectedRFC}
-              </div>
-            )}
-            {selectedYear && (
-              <div className="ml-4 flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-[#0077FF]"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 4H2v16h20V6h-8l-2-2z" />
-                </svg>
-                {selectedYear}
-              </div>
-            )}
-            {selectedMonth && (
-              <div className="ml-8 flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-[#0077FF]"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 4H2v16h20V6h-8l-2-2z" />
-                </svg>
-                {selectedMonth}
-              </div>
-            )}
-            {selectedType && (
-              <div className="ml-12 flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-[#0077FF]"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 4H2v16h20V6h-8l-2-2z" />
-                </svg>
-                {selectedType}
-              </div>
-            )}
-
-            {documentosCargados.length > 0 && (
-              <div className="ml-16 mt-4">
-                {documentosCargados.map((file, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <svg
-                      className="w-5 h-5 text-black"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4 16V4a2 2 0 012-2h8l6 6v8a2 2 0 01-2 2H6a2 2 0 01-2-2z"
-                      />
-                    </svg>
-                    <span>{file.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {(selectedRFC || selectedYear || selectedMonth || selectedType || documentosCargados.length > 0) && (
-              <p className="mt-6 ml-2 text-xs text-gray-500">
-                Ruta de Carga
-              </p>
-            )}
           </div>
         </div>
 

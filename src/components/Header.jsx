@@ -5,14 +5,11 @@ import ModalCargaArchivos from './ModalCargaArchivos'
 
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
-import Tooltip from '@mui/material/Tooltip'
 
-import { useState, useRef, useEffect} from 'react'
+import { useState, useRef, useEffect } from 'react'
 //import { useNavigate } from 'react-router-dom'
 
-import { Mail, Building, Signature, IdCard, SlidersVertical, Settings, DoorOpen, Save } from 'lucide-react'
-
-
+import { Mail, Building, Signature, IdCard, SlidersVertical, Settings, DoorOpen } from 'lucide-react'
 const Header = () => {
   const [ showModalSaveChangesPrompt, setShowModalSaveChangesPrompt ] = useState(false)
   const [ showModalCloseSession, setShowModalCloseSession ] = useState(false)
