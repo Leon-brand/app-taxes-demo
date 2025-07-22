@@ -22,7 +22,7 @@ const RFCDropdownButton = ({ options = [], onSelect }) => {
       <button
         onClick={() => setOpen(!open)}
         className={`flex flex-col items-center mt-3 px-2 py-1 w-[113px] rounded-2xl text-sm transition-all duration-300
-            ${open ? 'bg-[#F2F5F6] text-[#143559]' : 'bg-[#0077FF] text-white'} hover:bg-[#F2F5F6] hover:text-[#00B69B]`}
+            ${open ? 'bg-[#F2F5F6] text-[#143559]' : 'bg-[#0077FF] text-white'} hover:bg-[#F2F5F6] hover:text-[#0077FF]`}
         aria-label='Seleccionar RFC'
         title='Seleccionar RFC'
         type="button"

@@ -7,7 +7,6 @@ import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 
 import { useState, useRef, useEffect } from 'react'
-//import { useNavigate } from 'react-router-dom'
 
 import { Mail, Building, Signature, IdCard, SlidersVertical, Settings, DoorOpen } from 'lucide-react'
 const Header = () => {
@@ -18,16 +17,14 @@ const Header = () => {
   const [showUserMenu, setShowUserMenu] = useState(false)
   const dropdownRef = useRef(null)
 
-  //const navigate = useNavigate()
-
   const optionsRFC = [
-    { value: 'ABYZ99009', label: 'RFC: ABYZ99009' },
-    { value: 'XYZ112233', label: 'RFC: XYZ112233' },
-    { value: 'MNO556677', label: 'RFC: MNO556677' },
-    { value: 'PQR778899', label: 'RFC: PQR778899' },
-    { value: 'YHNK88990', label: 'RFC: YHNK88990' },
-    { value: 'OKMJK7777', label: 'RFC: OKMJK7777' },
-    { value: 'RTUHH9999', label: 'RFC: RTUHH9999' },
+    { value: 'ABYZ99009', label: 'RFC: ABYZ99009', razon: 'Empresa AAA' },
+    { value: 'XYZ112233', label: 'RFC: XYZ112233', razon: 'Empresa BBB' },
+    { value: 'MNO556677', label: 'RFC: MNO556677', razon: 'Empresa CCC' },
+    { value: 'PQR778899', label: 'RFC: PQR778899', razon: 'Empresa DDD' },
+    { value: 'YHNK88990', label: 'RFC: YHNK88990', razon: 'Empresa EEE' },
+    { value: 'OKMJK7777', label: 'RFC: OKMJK7777', razon: 'Empresa FFF' },
+    { value: 'RTUHH9999', label: 'RFC: RTUHH9999', razon: 'Empresa GGG' },
   ]
   useEffect(() => {
   /**
