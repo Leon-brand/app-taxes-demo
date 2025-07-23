@@ -2,85 +2,38 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import LoginForm from '../components/LoginForm'
-//import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
+import SelectRFC from '../components/SelectRFC'
 import CircularProgress from '@mui/material/CircularProgress'
 
 const Login = () => {
 
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [isColumnLayout, setIsColumnLayout] = useState(false)
+  const [step, setStep] = useState('login') // 'login' | 'selectRFC' | 'loading'
+  const [ errorMsg, setErrorMsg ] = useState('')
   const navigate = useNavigate()
 
   const mockCredentials = { usuario: 'admin', password: '1234' }
-  //const url = 'https://d624-2806-107e-22-ea15-5b81-97f4-276a-71fd.ngrok-free.app/login'
+  const handleSubmit = (credentials) => {
+    const isValid =
+      credentials.username === mockCredentials.usuario &&
+      credentials.password === mockCredentials.password
 
-  const handleSubmit = (credentials) => {//Funcion mock mientras se termina el endpoint
-    setIsLoggingIn(true)
+    if (isValid) {
+      setStep('selectRFC') // Avanza al siguiente paso
+    } else {
+      //alert('Verifica tus credenciales por favor')
+      setErrorMsg('El usuario y contraseña son incorrectos')
+    }
+  }
+
+  const handleRFCSelection = () => {
+    setStep('loading')
 
     setTimeout(() => {
-      const isValid =
-        credentials.username === mockCredentials.usuario &&
-        credentials.password === mockCredentials.password
-
-      setIsLoggingIn(false)
-
-      if (isValid) {
-        localStorage.setItem('auth', 'true')
-        navigate('/')
-      } else {
-        setIsLoggingIn(false)
-        setTimeout(() => {
-          alert('Verifica tus credenciales por favor')
-        }, 100)
-      }
+      localStorage.setItem('auth', 'true')
+      navigate('/')
     }, 3000)
   }
-  /*   const handleSubmit = async (credentials) => {
-    setIsLoggingIn(true)
-
-    const result = await verifyCredentials(credentials)
-    if (result) {
-      setTimeout(() => {
-        localStorage.removeItem('access_token')
-        localStorage.removeItem('token_type')
-        navigate('/')
-      }, 3000)
-    } else {
-      alert('Verifica tus credenciales por favor')
-    }
-    setIsLoggingIn(false)
-  }
-
-  async function verifyCredentials(credentials) {
-    const body = {
-      usuario: credentials.username,
-      contrasena: credentials.password
-    }
-
-    console.log('Enviando body:', body)
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-
-      if (!response.ok) {
-        console.warn(`Error HTTP: ${response.status}`)
-        return null
-      }
-
-      const data = await response.json()
-      console.log('Login OK:', data)
-      return data
-    } catch (error) {
-      console.error('Error de red o fetch:', error)
-      return null
-    }
-  } */
 
   useEffect(()=> {
     // Función que evalúa el ancho de la ventana y actualiza el estado
@@ -97,94 +50,105 @@ const Login = () => {
   }, [])
 
   return (
-
     <div
       className={`
         bg-gradient-to-b from-[#143559] via-[#123458] to-[#F2F5F6]
         text-white min-h-screen w-full overflow-hidden p-20 flex
-        ${/* CHANGE: pasa a columna y centra todo cuando login */ ''}
-        ${isLoggingIn ? 'flex-col items-center justify-start' : 'flex-col md:flex-row'}
         transition-all duration-900
+        ${
+    step === 'selectRFC'
+      ? 'flex-col items-center justify-start'
+      : step === 'loading'
+        ? 'flex-col items-center justify-start'
+        : 'md:flex-row'
+    }
       `}
     >
       {/* Panel izquierdo */}
       <div
         className={`
-          w-full md:w-1/2 flex flex-col  p-6 gap-1 mt-5
+          w-full md:w-1/2 flex flex-col px-6 py-2 gap-1 mt-2
           items-center
-          transition-opacity duration-500
+          transition-opacity duration-800
         `}
       >
         <div className="max-w-md relative">
           <img
             src="/logoTransparente.png"
             alt="Intelitax"
-            className="w-[410px] h-[120px] mb-14 object-contain"
+            className="w-[410px] h-[120px] mb-6 object-contain"
           />
           <h2
             className={`
-                    absolute left-0 right-0 mx-auto max-w-md
-                    text-3xl font-semibold text-left text-white
-                    transition-all duration-300 ease-in-out transform
-                    ${isLoggingIn ? 'opacity-0' : 'opacity-100 mb-10'}
-                `}
+              absolute left-0 right-0 mx-auto max-w-md
+              text-3xl font-semibold text-left text-white
+              transition-all duration-500 ease-in-out transform
+              ${
+    step === 'selectRFC' || step === 'loading'
+      ? 'opacity-0'
+      : 'opacity-100 mb-10'
+    }
+            `}
           >
-                Somos la plataforma de inteligencia fiscal-contable más confiable para empresas medianas y grandes.
+            Somos la plataforma de inteligencia fiscal-contable más confiable
+            para empresas medianas y grandes.
           </h2>
-
         </div>
       </div>
 
       {/* Panel derecho */}
-      <div className="w-full md:w-1/2 flex flex-col items-center p-10 order-2 relative">
-        <div
-          className={`
-                transition-all duration-500 transform
-                ${isLoggingIn
-      ? 'opacity-0 scale-95 pointer-events-none absolute'
-      : 'opacity-100 scale-100 relative'}
-                `}
-        >
-          <LoginForm onSubmit={handleSubmit} isColumnLayout={isColumnLayout} />
-        </div>
-        <div
-          className={`
-            bg-white rounded-lg shadow-md p-6 flex flex-col items-center
-            transition-all duration-500 transform w-[300px] h-[260px] delay-300 
-            ${isLoggingIn
-      ? 'opacity-100 scale-100 relative'
-      : 'opacity-0 scale-95 pointer-events-none absolute'}
-            `}
-        >
-          <h2 className="text-3xl font-extrabold text-[#123458] m-4">Iniciando</h2>
-
-          <CircularProgress
-            size="65px"
-            thickness={5}
-            className="mt-10"
-            sx={{
-              color: '#143559',
-              animationDuration: '900ms',
-            }}
+      <div
+        className={`w-full flex flex-col items-center p-2 order-2 relative 
+          ${step === 'loading' ? 'justify-center md:justify-center md:items-center md:w-full' : 'md:w-1/2'}`}
+      >
+        {/* LOGIN */}
+        {step === 'login' && (
+          <LoginForm
+            onSubmit={handleSubmit}
+            isColumnLayout={isColumnLayout}
+            errorMsg={errorMsg}
           />
+        )}
+
+        {/* SELECT RFC */}
+        <div
+          className={`
+            transition-opacity duration-800 absolute w-full flex justify-center
+            ${
+    step === 'selectRFC'
+      ? 'opacity-100 pointer-events-auto relative'
+      : 'opacity-0 pointer-events-none'
+    }
+          `}
+        >
+          <SelectRFC onSelect={handleRFCSelection} />
         </div>
-        {/*!isLoggingIn && (
-          <div className="mt-6 w-[400px] flex justify-center">
-            <button
-              className="
-                flex items-center gap-1 px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
-                bg-white text-[#143559] text-sm transition-all duration-300 border-[#143559] font-bold
-                w-[160px] h-[46px] justify-center hover:bg-[#143559] hover:text-white
-                "
-            >
-              <HelpOutlineOutlinedIcon fontSize="medium" />
-              <span className="font-extrabold">Ayuda</span>
-            </button>
+
+        {/* LOADING*/}
+        <div
+          className={`
+            transition-opacity duration-800 absolute w-full flex justify-center
+            ${
+    step === 'loading'
+      ? 'opacity-100 pointer-events-auto relative'
+      : 'opacity-0 pointer-events-none'
+    }
+          `}
+        >
+          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-[400px] h-[260px]">
+            <h2 className="text-3xl font-extrabold text-[#123458] m-4">Iniciando</h2>
+            <CircularProgress
+              size="65px"
+              thickness={5}
+              className="mt-2"
+              sx={{ color: '#143559', animationDuration: '900ms' }}
+            />
           </div>
-        )*/}
+        </div>
       </div>
     </div>
   )
+
 }
 
 export default Login

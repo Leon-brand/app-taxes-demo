@@ -4,7 +4,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined'
 import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined'
 
-const LoginForm = ({ onSubmit, isColumnLayout }) => {
+const LoginForm = ({ onSubmit, isColumnLayout, errorMsg }) => {
 
   const isColumn = isColumnLayout
 
@@ -19,12 +19,12 @@ const LoginForm = ({ onSubmit, isColumnLayout }) => {
     <form
       onSubmit={handleLogin} // conecta el submit al manejador
       className={`
-        w-full max-w-[400px] min-w-[300px] bg-white rounded-lg shadow-md p-6
+        w-full max-w-[375px] min-w-[300px] bg-white rounded-lg shadow-md p-6
         ${isColumn ? 'mt-60' : 'mt-10'}
         transition-all duration-500
       `}
     >
-      <h1 className="text-3xl font-extrabold text-center mb-10">
+      <h1 className="text-3xl font-extrabold text-center mb-12">
         Bienvenido
       </h1>
       {/* Usuario */}
@@ -59,6 +59,7 @@ const LoginForm = ({ onSubmit, isColumnLayout }) => {
           <KeyOutlinedIcon className="text-gray-400 ml-2" fontSize="medium" />
         </div>
       </div>
+      {errorMsg !== '' && <p className="text-red-600 text-sm mb-0 text-center">{errorMsg}</p>}
 
       <hr className="border-gray-300 my-10" />
       {/* Botón de envío */}
@@ -71,8 +72,8 @@ const LoginForm = ({ onSubmit, isColumnLayout }) => {
         Acceder
       </button>
       {/* Enlace de recuperación */}
-      <div className="mt-4 text-sm text-center">
-        <a href="#" className="text-blue-600 hover:underline">
+      <div className="mt-6 mb-2 text-sm text-center">
+        <a href="#" className="text-[#0077FF] hover:underline">
           ¿Olvidaste tu contraseña?
         </a>
       </div>
@@ -83,6 +84,7 @@ const LoginForm = ({ onSubmit, isColumnLayout }) => {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isColumnLayout: PropTypes.bool,
+  errorMsg: PropTypes.string
 }
 
 export default LoginForm
