@@ -9,7 +9,7 @@ const SelectRFC = ({ onSelect }) => {
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
 
-  const opcionesRFC = [
+  const opcionesRFC= [
     'Empresa AAA / RFC ABY2990009',
     'Empresa BBB / RFC ZZY8841149',
     'Empresa CCC / RFC HHT1234567',
@@ -17,15 +17,9 @@ const SelectRFC = ({ onSelect }) => {
     'Empresa EEE / RFC EDC4567890',
     'Empresa FFF / RFC OKL1234567',
     'Empresa GGG / RFC PQR1234567',
-    'Empresa HHH / RFC ABC1234567',
-    'Empresa III / RFC EFG1234567',
-    'Empresa JJJ / RFC TUV1234567',
-    'Empresa KKK / RFC ABC5454547',
-    'Empresa LLL / RFC OKL1234567',
-    'Empresa MMM / RFC PQR1234567',
-    'Empresa NNN / RFC MNO1234567',
-    'Empresa OOO / RFC EFG1234567',
-    'Empresa PPP / RFC TUV1234567',
+    'Empresa HHH1 / RFC UJM9753186',
+    'Empresa III1 / RFC QWE1234560',
+    'Empresa JJJ1 / RFC ASD6547893',
   ]
 
   // Opciones filtradas dinámicamente
@@ -93,7 +87,7 @@ const SelectRFC = ({ onSelect }) => {
 
       <button
         type="submit"
-        className="w-full mt-6 bg-[#143559] hover:bg-[#0077FF] text-white font-bold py-2 rounded transition-all duration-300"
+        className="w-full mt-6 bg-[#143559] hover:bg-[#0077FF] text-white font-bold py-2 rounded-md transition-all duration-300"
       >
         <CheckCircleOutlineOutlinedIcon fontSize="large" className="mr-2" />
         Aceptar

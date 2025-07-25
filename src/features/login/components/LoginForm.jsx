@@ -4,7 +4,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined'
 import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined'
 
-const LoginForm = ({ onSubmit, isColumnLayout, errorMsg }) => {
+const LoginForm = ({ onSubmit, isColumnLayout, errorMsg, onForgotPassword }) => {
 
   const isColumn = isColumnLayout
 
@@ -66,16 +66,20 @@ const LoginForm = ({ onSubmit, isColumnLayout, errorMsg }) => {
       <button
         type="submit"
         className="w-full h-[46px] bg-[#0e325a] hover:bg-[#0077FF] text-white font-semibold
-                   px-4 rounded shadow-md flex items-center justify-center gap-2 transition-all duration-300"
+                   px-4 rounded-md shadow-md flex items-center justify-center gap-2 transition-all duration-300"
       >
         <MeetingRoomOutlinedIcon fontSize="large" />
         Acceder
       </button>
       {/* Enlace de recuperación */}
       <div className="mt-6 mb-2 text-sm text-center">
-        <a href="#" className="text-[#0077FF] hover:underline">
+        <button
+          type="button"
+          onClick={onForgotPassword}
+          className="text-[#0077FF] hover:underline"
+        >
           ¿Olvidaste tu contraseña?
-        </a>
+        </button>
       </div>
     </form>
   )
@@ -84,7 +88,8 @@ const LoginForm = ({ onSubmit, isColumnLayout, errorMsg }) => {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isColumnLayout: PropTypes.bool,
-  errorMsg: PropTypes.string
+  errorMsg: PropTypes.string,
+  onForgotPassword: PropTypes.func
 }
 
 export default LoginForm

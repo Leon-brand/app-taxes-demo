@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import LoginForm from '../components/LoginForm'
 import SelectRFC from '../components/SelectRFC'
 import CircularProgress from '@mui/material/CircularProgress'
+import ResetPassword from '../components/ResetPassword'
 
 const Login = () => {
 
   const [isColumnLayout, setIsColumnLayout] = useState(false)
-  const [step, setStep] = useState('login') // 'login' | 'selectRFC' | 'loading'
+  const [step, setStep] = useState('login') // 'login' | 'selectRFC' | 'loading'| 'resetPassword'
   const [ errorMsg, setErrorMsg ] = useState('')
   const navigate = useNavigate()
 
@@ -52,17 +53,15 @@ const Login = () => {
   return (
     <div
       className={`
-        bg-gradient-to-b from-[#143559] via-[#123458] to-[#F2F5F6]
-        text-white min-h-screen w-full overflow-hidden p-20 flex
-        transition-all duration-900
-        ${
-    step === 'selectRFC'
+    bg-gradient-to-b from-[#143559] via-[#123458] to-[#F2F5F6]
+    text-white min-h-screen w-full overflow-hidden p-20 flex
+    transition-all duration-900
+    ${
+    ['selectRFC', 'loading', 'resetPassword'].includes(step)
       ? 'flex-col items-center justify-start'
-      : step === 'loading'
-        ? 'flex-col items-center justify-start'
-        : 'md:flex-row'
+      : 'md:flex-row'
     }
-      `}
+  `}
     >
       {/* Panel izquierdo */}
       <div
@@ -82,9 +81,9 @@ const Login = () => {
             className={`
               absolute left-0 right-0 mx-auto max-w-md
               text-3xl font-semibold text-left text-white
-              transition-all duration-500 ease-in-out transform
+              transition-all duration-300 ease-in-out transform
               ${
-    step === 'selectRFC' || step === 'loading'
+    step === 'selectRFC' || step === 'loading' || step === 'resetPassword'
       ? 'opacity-0'
       : 'opacity-100 mb-10'
     }
@@ -107,19 +106,33 @@ const Login = () => {
             onSubmit={handleSubmit}
             isColumnLayout={isColumnLayout}
             errorMsg={errorMsg}
+            onForgotPassword={() => setStep('resetPassword')}
           />
         )}
+
+        <div
+          className={`
+    absolute w-full flex justify-center transform transition-all duration-800
+    ${
+    step === 'resetPassword'
+      ? 'opacity-100 translate-y-0 pointer-events-auto relative'
+      : 'opacity-0 translate-y-5 pointer-events-none'
+    }
+  `}
+        >
+          <ResetPassword onBackToLogin={() => setStep('login')} />
+        </div>
 
         {/* SELECT RFC */}
         <div
           className={`
-            transition-opacity duration-800 absolute w-full flex justify-center
-            ${
+    absolute w-full flex justify-center transform transition-all duration-800
+    ${
     step === 'selectRFC'
-      ? 'opacity-100 pointer-events-auto relative'
-      : 'opacity-0 pointer-events-none'
+      ? 'opacity-100 translate-y-0 pointer-events-auto relative'
+      : 'opacity-0 translate-y-5 pointer-events-none'
     }
-          `}
+  `}
         >
           <SelectRFC onSelect={handleRFCSelection} />
         </div>
@@ -127,14 +140,17 @@ const Login = () => {
         {/* LOADING*/}
         <div
           className={`
-            transition-opacity duration-800 absolute w-full flex justify-center
+            absolute w-full flex justify-center transform transition-all duration-800
             ${
     step === 'loading'
-      ? 'opacity-100 pointer-events-auto relative'
-      : 'opacity-0 pointer-events-none'
+      ? 'opacity-100 translate-y-0 pointer-events-auto relative'
+      : 'opacity-0 translate-y-5 pointer-events-none'
     }
           `}
         >
+
+
+
           <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-[400px] h-[260px]">
             <h2 className="text-3xl font-extrabold text-[#123458] m-4">Iniciando</h2>
             <CircularProgress
