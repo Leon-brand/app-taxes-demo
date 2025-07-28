@@ -27,7 +27,8 @@ const ModalCloseSession = ({ isOpen, onClose }) => {
    */
   const handleLogout = () => {
     localStorage.removeItem('auth')
-    localStorage.removeItem('hasSeenWelcomeModal')
+    localStorage.removeItem('rfc')
+    //localStorage.removeItem('hasSeenWelcomeModal')
     //sessionStorage.clear
     window.location.replace('/login')//prevenir navegación hacia atrás
   }

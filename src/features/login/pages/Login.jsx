@@ -20,9 +20,8 @@ const Login = () => {
       credentials.password === mockCredentials.password
 
     if (isValid) {
-      setStep('selectRFC') // Avanza al siguiente paso
+      setStep('selectRFC')
     } else {
-      //alert('Verifica tus credenciales por favor')
       setErrorMsg('El usuario y contraseña son incorrectos')
     }
   }
@@ -147,11 +146,7 @@ const Login = () => {
       : 'opacity-0 translate-y-5 pointer-events-none'
     }
           `}
-        >
-
-
-
-          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-[400px] h-[260px]">
+        > <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-[400px] h-[260px]">
             <h2 className="text-3xl font-extrabold text-[#123458] m-4">Iniciando</h2>
             <CircularProgress
               size="65px"

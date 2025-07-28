@@ -1,9 +1,8 @@
 import SidebarBoveda from '../components/SidebarBoveda'
 import ModalConfiguracionColumnas from '../components/ModalConfiguracionColumnas'
 import CustomeDropDown from '@/components/CustomeDropDown'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import RequestPageOutlinedIcon from '@mui/icons-material/RequestPageOutlined'
 import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined'
 import SystemUpdateAltOutlinedIcon from '@mui/icons-material/SystemUpdateAltOutlined'
 import { SlidersVertical } from 'lucide-react'
@@ -16,6 +15,18 @@ const CFDIsPage = () => {
   const [ selectedType, setSelectedType] = useState('')
   const [ showModalConfigColumnas , setShowModalConfigColumnas] = useState(false)
   const [ showTable, setShowTable] = useState(false)
+
+  const [ razonSocial, setRazonSocial ] = useState('')
+  const [ rfc, setRFC ] = useState('')
+
+  useEffect(() => {
+    const data = localStorage.getItem('rfc')
+    if (data) {
+      const [razon, rfcCompleto] = data.split(' / ')
+      setRazonSocial(razon)
+      setRFC(rfcCompleto)
+    }
+  }, [ razonSocial, rfc ])
 
   const columnasDisponibles = [
     'UUID/Clave',
@@ -94,12 +105,9 @@ const CFDIsPage = () => {
           <div className="flex items-center gap-2">
             <h1 className="text-3xl font-bold">Bóveda Fiscal - CFDIs</h1>
           </div>
-          <div>
-            <RequestPageOutlinedIcon
-              style={{ fontSize: 52 }}
-              alt="CFDIs"
-              titleAccess="CFDIs"
-            />
+          <div className="text-right">
+            <p className="font-semibold text-gray-700">{razonSocial}</p>
+            <p className="text-sm text-gray-500">{rfc}</p>
           </div>
         </div>
         <div className="flex flex-col w-full">

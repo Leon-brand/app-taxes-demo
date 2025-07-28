@@ -9,17 +9,57 @@ const SelectRFC = ({ onSelect }) => {
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
 
-  const opcionesRFC= [
-    'Empresa AAA / RFC ABY2990009',
-    'Empresa BBB / RFC ZZY8841149',
-    'Empresa CCC / RFC HHT1234567',
-    'Empresa DDD / RFC QWE2223333',
-    'Empresa EEE / RFC EDC4567890',
-    'Empresa FFF / RFC OKL1234567',
-    'Empresa GGG / RFC PQR1234567',
-    'Empresa HHH1 / RFC UJM9753186',
-    'Empresa III1 / RFC QWE1234560',
-    'Empresa JJJ1 / RFC ASD6547893',
+  const opcionesRFC = [
+    'Café Sirena S.A. de C.V. / RFC CSR981223ABC',
+    'Logística del Norte S.A. de C.V. / RFC LON940102XYZ',
+    'Comercializadora Trébol S.A. de C.V. / RFC CTR850623LMN',
+    'Grupo Madero S.A. de C.V. / RFC GMD951212QWE',
+    'Refacciones del Bajío S.A. de C.V. / RFC RFB890101ASD',
+    'Tecnologías Andinas S.A. de C.V. / RFC TAN780322ZXC',
+    'Constructora Tikal S.A. de C.V. / RFC CTK860812FDS',
+    'Distribuidora Nopal S.A. de C.V. / RFC DNP900101WER',
+    'Helados Azteca S.A. de C.V. / RFC HAZ750505RFG',
+    'Farmacia Central S.A. de C.V. / RFC FCE840430MNB',
+    'Electrodomésticos Galaxia S.A. de C.V. / RFC EGA720109LKJ',
+    'Servicios Zafiro S.A. de C.V. / RFC SZS950101IOP',
+    'Alimentos Omega S.A. de C.V. / RFC AOM910615PLM',
+    'Panadería La Espiga S.A. de C.V. / RFC PLE890409DSA',
+    'Tortillería del Sur S.A. de C.V. / RFC TDS930201ZXA',
+    'Maderas del Valle S.A. de C.V. / RFC MDV850922HJK',
+    'Aceites Quetzal S.A. de C.V. / RFC AQZ920309UYU',
+    'Papelería Prisma S.A. de C.V. / RFC PPR760723MXN',
+    'Tintorería Neptuno S.A. de C.V. / RFC TNP800801JHG',
+    'Vidrios Monterrey S.A. de C.V. / RFC VDM960521TRE',
+    'Hotel Las Palmas S.A. de C.V. / RFC HLP840727OPO',
+    'Grupo Delta S.A. de C.V. / RFC GDE830314KJI',
+    'Red Soluciones S.A. de C.V. / RFC RSO970913ASD',
+    'Transporte Express S.A. de C.V. / RFC TEX911219WSX',
+    'Autopartes Jaguar S.A. de C.V. / RFC AJG780715TRE',
+    'Asesoría Fiscal MX S.A. de C.V. / RFC AFM991207BVC',
+    'Jardinería Florencia S.A. de C.V. / RFC JFL801101JKS',
+    'Taller Mecánico Zeus S.A. de C.V. / RFC TMZ740930IOU',
+    'Estética Venus S.A. de C.V. / RFC EVS850311HHH',
+    'Oficinas y Más S.A. de C.V. / RFC OYM940822LPO',
+    'Bicicletas Aztlán S.A. de C.V. / RFC BAZ910408NMB',
+    'Audio y Luces S.A. de C.V. / RFC AYL951105CVB',
+    'Empaques del Centro S.A. de C.V. / RFC EDC990723KLM',
+    'Soluciones Integrales MX S.A. de C.V. / RFC SIM781112QWE',
+    'Rosticería El Buen Pollo S.A. de C.V. / RFC RBP930919ZXC',
+    'Clínica Santa María S.A. de C.V. / RFC CSM800613XCV',
+    'Servicios Industriales MX S.A. de C.V. / RFC SIM981127GHJ',
+    'Carpintería La Ceiba S.A. de C.V. / RFC CLC830217DFG',
+    'Consultoría Vector S.A. de C.V. / RFC CVE921201ASX',
+    'Sastrería Imperial S.A. de C.V. / RFC SIM751204XSA',
+    'Panadería Montecristo S.A. de C.V. / RFC PMC900812REW',
+    'Uniformes Centenario S.A. de C.V. / RFC UCE860321TGB',
+    'Gasolinera Ruta 45 S.A. de C.V. / RFC GRQ990512CVX',
+    'Ferretería El Tornillo S.A. de C.V. / RFC FET960403UIO',
+    'Repostería La Luna S.A. de C.V. / RFC RLL910215MMM',
+    'Pastelería D’Francia S.A. de C.V. / RFC PDF870721QQQ',
+    'Autolavado El Rayo S.A. de C.V. / RFC AER921231PPP',
+    'Impresiones Grafimax S.A. de C.V. / RFC IGF950130LLL',
+    'Zapatería El Paso S.A. de C.V. / RFC ZEP790213TTT',
+    'Editorial Los Andes S.A. de C.V. / RFC ELA860502FFF'
   ]
 
   // Opciones filtradas dinámicamente
@@ -87,6 +127,7 @@ const SelectRFC = ({ onSelect }) => {
 
       <button
         type="submit"
+        onClick={() => {onSelect(selectedRFC), localStorage.setItem('rfc', selectedRFC)}}
         className="w-full mt-6 bg-[#143559] hover:bg-[#0077FF] text-white font-bold py-2 rounded-md transition-all duration-300"
       >
         <CheckCircleOutlineOutlinedIcon fontSize="large" className="mr-2" />

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import CustomeDropDown from '@/components/CustomeDropDown'
@@ -15,9 +15,17 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
   const [ selectedType, setSelectedType] = useState('')
   const [ documentosCargados, setDocumentosCargados ] = useState([])
   const [ uploadSummary, setUploadSummary ] = useState(null)
+  const [ razonSocial, setRazonSocial ] = useState('')
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const data = localStorage.getItem('rfc')
+    if (data) {
+      const razon = data.split(' / ')[0]
+      setRazonSocial(razon)
+    }
+  }, [])
   const handleDrop = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -133,7 +141,7 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
                 <h1 className="text-3xl font-bold">Carga de Archivos</h1>
               </div>
               <div className="text-right mt-2">
-                <p className="font-semibold text-gray-500">Empresa AAA S.A. de C.V.</p>
+                <p className="font-semibold text-gray-500">{ razonSocial }</p>
               </div>
             </div>
             <div className="flex gap-4 mt-4 mb-4 justify-center">
