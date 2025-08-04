@@ -94,7 +94,7 @@ const ResetPassword = ({ onBackToLogin }) => {
                       px-4 rounded-md shadow-md flex items-center justify-center gap-2 transition-all duration-300"
             >
               <MeetingRoomOutlinedIcon fontSize="large" />
-              Enviar enlace
+              Volver al inicio
             </button>
           </div>
         </div>

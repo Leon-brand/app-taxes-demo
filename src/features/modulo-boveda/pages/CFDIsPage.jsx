@@ -8,7 +8,6 @@ import SystemUpdateAltOutlinedIcon from '@mui/icons-material/SystemUpdateAltOutl
 import { SlidersVertical } from 'lucide-react'
 
 const CFDIsPage = () => {
-  const [selectedRFC, setSelectedRFC] = useState('')
   const [selectedYear, setSelectedYear] = useState('')
   const [ selectedMonth, setSelectedMonth] = useState('')
   const [ selectedCharacter, setSelectedCharacter] = useState('')
@@ -41,16 +40,6 @@ const CFDIsPage = () => {
     'Retenciones',
     'Régimen Fiscal',
     'Categoría de Producto o Servicio',
-  ]
-
-  const optionsRFC = [
-    { value: 'ABYZ99009', label: 'ABYZ99009' },
-    { value: 'XYZ112233', label: 'XYZ112233' },
-    { value: 'MNO556677', label: 'MNO556677' },
-    { value: 'PQR778899', label: 'PQR778899' },
-    { value: 'YHNK88990', label: 'YHNK88990' },
-    { value: 'OKMJK7777', label: 'OKMJK7777' },
-    { value: 'RTUHH9999', label: 'RTUHH9999' },
   ]
 
   const optionsYear = [
@@ -100,8 +89,8 @@ const CFDIsPage = () => {
   return (
     <div className="flex w-full">
       <SidebarBoveda />
-      <div className="w-full min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-14">
-        <div className="flex justify-between w-full mb-2">
+      <div className="w-full min-h-screen bg-[#F2F5F6] flex flex-col px-8 py-10 mt-14">
+        <div className="flex justify-between w-full max-w-6xl mb-2">
           <div className="flex items-center gap-2">
             <h1 className="text-3xl font-bold">Bóveda Fiscal - CFDIs</h1>
           </div>
@@ -111,30 +100,21 @@ const CFDIsPage = () => {
           </div>
         </div>
         <div className="flex flex-col w-full">
-          <div className={`flex gap-3 mt-4 ${showTable ? 'mb-6' : 'mb-12'}`}>
+          <div className={`flex gap-3 mt-4 w-full max-w-6xl ${showTable ? 'mb-6' : 'mb-12'}`}>
             <div className="relative inline-block">
-              {!selectedRFC && (
+              {!selectedYear && (
                 <span className="absolute -top-3 -right-0 z-10">
                   <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
                 </span>
               )}
               <CustomeDropDown
                 className="w-[160px] h-[28px] text-center justify-center"
-                placeholder="RFC"
-                title="Selecciona un RFC para habilitar los demás filtros"
-                data={optionsRFC}
-                value={selectedRFC}
-                onChange={setSelectedRFC}
+                placeholder="Año"
+                data={optionsYear}
+                value={selectedYear}
+                onChange={setSelectedYear}
               />
             </div>
-            <CustomeDropDown
-              className="w-[160px] h-[28px] text-center justify-center"
-              placeholder="Año"
-              data={optionsYear}
-              value={selectedYear}
-              onChange={setSelectedYear}
-              disabled={!selectedRFC}
-            />
             <CustomeDropDown
               className="w-[160px] h-[28px] text-center justify-center"
               placeholder="Mes"
@@ -159,17 +139,12 @@ const CFDIsPage = () => {
               onChange={setSelectedType}
               disabled={!selectedCharacter}
             />
-            <div className="relative inline-block">
-              {selectedType && !showTable && (
-                <span className="absolute -top-3 -right-0 z-10">
-                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
-                </span>
-              )}
+            <div className='flex ml-auto' >
               <button
                 disabled={!selectedType}
                 className={`flex items-center ml-4 px-2 py-1 rounded-md text-sm transition-all duration-300 
                 w-[180px] h-[32px] justify-center
-                ${
+            ${
     selectedType === ''
       ? 'cursor-not-allowed bg-gray-200 text-gray-400'
       : 'cursor-pointer bg-[#F2F5F6] text-[#143559] shadow-[0_4px_12px_rgba(20,53,89,0.3)] hover:bg-[#143559] hover:text-white'
@@ -181,6 +156,13 @@ const CFDIsPage = () => {
                 <SlidersVertical size={20} className="mr-2" />
                 Configurar Tabla
               </button>
+            </div>
+            <div className="relative inline-block">
+              {selectedType && !showTable && (
+                <span className="absolute -top-3 -right-0 z-10">
+                  <span className="relative inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
+                </span>
+              )}
             </div>
           </div>
           {showTable ? (
@@ -198,7 +180,6 @@ const CFDIsPage = () => {
                 <table className="table-auto w-full h-full border-collapse">
                   <thead className="bg-[#CFE5FF] text-[#143559]">
                     <tr>
-                      <th className="border px-4 py-2">RFC</th>
                       <th className="border px-4 py-2">Año</th>
                       <th className="border px-4 py-2">Mes</th>
                       <th className="border px-4 py-2">Carácter</th>
@@ -207,7 +188,6 @@ const CFDIsPage = () => {
                   </thead>
                   <tbody>
                     <tr className="text-center">
-                      <td className="border px-4 py-2">{selectedRFC}</td>
                       <td className="border px-4 py-2">{selectedYear}</td>
                       <td className="border px-4 py-2">{selectedMonth}</td>
                       <td className="border px-4 py-2">{selectedCharacter}</td>

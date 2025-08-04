@@ -51,10 +51,14 @@ const Login = () => {
 
   return (
     <div
+    /*  style={{
+      backgroundColor: '#143559',
+      background: 'linear-gradient(151deg,rgba(20, 53, 89, 1) 25%, rgba(220, 231, 242, 1) 100%)' }} */
+      /* Opcion 2 degradado de fondo, arriba */
       className={`
-    bg-gradient-to-b from-[#143559] via-[#123458] to-[#F2F5F6]
-    text-white min-h-screen w-full overflow-hidden p-20 flex
-    transition-all duration-900
+   bg-gradient-to-r from-[#0a0a1f] via-[#0f2e5a] to-[#155d9e]
+  text-white min-h-screen w-full overflow-hidden p-20 flex
+  transition-all duration-900
     ${
     ['selectRFC', 'loading', 'resetPassword'].includes(step)
       ? 'flex-col items-center justify-start'

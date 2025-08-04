@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { Check, Square } from 'lucide-react'
-import { CircleX, Columns3Cog } from 'lucide-react'
+import { CircleX, Columns3Cog, Check, Square } from 'lucide-react'
+import ModalMasOpciones from './ModalMasOpciones'
 
 const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [], selectedColumns }) => {
-  //const [seleccionadas, setSeleccionadas] = useState(initialSelected)
 
   const [seleccionadas, setSeleccionadas] = useState([]) // Solo para probar selección visual
+  const [ verMasOpciones, setVerMasOpciones ] = useState(false)
 
   // Esta función actualiza el array de columnas seleccionadas.
   // Si la columna ya está seleccionada, la quita. Si no, la añade.
@@ -29,7 +29,7 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [],
   return (
     <div
       className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
-      onClick={onClose}
+    /*    onClick={onClose} */
     >
       <div
         className="bg-[#F2F5F6] border-2 border-[#143559] shadow-2xl rounded-xl p-6 w-full max-w-lg relative"
@@ -41,13 +41,14 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [],
         <p className="text-center text-sm text-[#143559] mb-6">
           Selecciona las columnas que quieras visualizar en la tabla.
         </p>
-        <div className="grid grid-cols-2 gap-y-4 gap-x-8 mb-8 px-4">
+        <div className="grid grid-cols-2 gap-y-4 gap-x-8 mb-4 px-4">
           {columnasDisponibles.map((columna) => {
             const checked = seleccionadas.includes(columna)
             return (
               <label
                 key={columna}
-                className="flex items-center cursor-pointer text-[#143559] text-sm font-medium"
+                className="flex items-center cursor-pointer text-[#143559] text-sm font-medium
+                hover:font-bold transition-all duration-500"
               >
                 <input
                   type="checkbox"
@@ -68,6 +69,15 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [],
               </label>
             )
           })}
+        </div>
+        <div className="mt-3 mb-4 text-md text-center">
+          <button
+            type="button"
+            onClick={() => {setVerMasOpciones(true)}}
+            className="text-[#0077FF] hover:font-bold hover:underline transition-all duration-500"
+          >
+            Más opciones
+          </button>
         </div>
         <div className='flex block justify-center gap-6'>
           <button
@@ -90,6 +100,41 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [],
           </button>
         </div>
       </div>
+      <ModalMasOpciones
+        isOpen={verMasOpciones}
+        onClose={() => {setVerMasOpciones(false)}}
+        selectedColumns={(cols) => console.log(cols)}
+        columnasConcepto={[
+          'Clave Producto o Servicio',
+          'No Identificación',
+          'Cantidad',
+          'Clave Unidad',
+          'Unidad',
+          'Descripción',
+          'Valor Unitario',
+          'Importe',
+          'Descuento'
+        ]}
+        columnasOtrosCampos={[
+          'Serie',
+          'Folio',
+          'Forma de Pago',
+          'Condiciones de Pago',
+          'SubTotal',
+          'Descuento',
+          'Moneda',
+          'Tipo de Cambio',
+          'Total',
+          'Lugar de Expedición',
+          'Tipo de Relación',
+          'UUID Relacionado',
+          'Periodicidad',
+          'Mes',
+          'Año',
+          'Uso CFDI',
+          'Fecha Timbrado'
+        ]}
+      />
     </div>
   )
 }

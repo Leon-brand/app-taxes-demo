@@ -76,7 +76,7 @@ const LoginForm = ({ onSubmit, isColumnLayout, errorMsg, onForgotPassword }) => 
         <button
           type="button"
           onClick={onForgotPassword}
-          className="text-[#0077FF] hover:underline"
+          className="text-[#0077FF] hover:font-bold hover:underline transition-all duration-500"
         >
           ¿Olvidaste tu contraseña?
         </button>
