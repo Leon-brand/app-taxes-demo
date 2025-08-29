@@ -34,7 +34,7 @@ const CustomeDropDown = ({ value, onChange, data=[], placeholder = 'Seleccione u
         title={selectedOption?.label ?? placeholder}
       >
         <div
-          className={`flex-grow px-2 border border-r-0 ${disabled ? 'border-gray-300' : 'border-[#CFE5FF]'} flex items-center justify-start h-full`}
+          className={`flex-grow px-2 border border-r-0 ${disabled ? 'border-gray-300' : 'border-[#CFE5FF]'} flex items-center justify-center h-full`}
           style={{ color: selectedOption ? '#143559' : '#666666' }}
         >
           {selectedOption?.label ?? placeholder}

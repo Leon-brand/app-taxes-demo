@@ -1,144 +1,85 @@
-import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { format } from 'date-fns'
+import { es } from 'date-fns/locale'
+import ModalSuccessProcess from '@/components/ModalSuccessProcess'
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined'
-import ReportProblemIcon from '@mui/icons-material/ReportProblem'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined'
-
-import PieChart from '../components/PieChart'
-import CheckTable from '../components/CheckTable'
-import DownloadTable from '../components/DownloadTable'
-import ModalNotepad from '../../../components/ModalNotepad'
+import { Eye, Compass,  TriangleAlert } from 'lucide-react'
 
 const ReporteHallazgos = () => {
 
-  const [tableData, setTableData] = useState([])
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalNotepadOpen, setModalNotepadOpen] = useState(false)
-  const [nota, setNota] = useState('')
-  const [myBloc, setMyBloc] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
+  const params = new URLSearchParams(location.search)
 
-  useEffect(() => {
-    const mockData = [
-      {
-        checked: false,
-        movimiento: 'ABC123',
-        RFC: 'XYZ91011234',
-        emisor: 'Empresa S.A.',
-        subtotal: '10,000.00',
-        IVA: '1,600.00',
-      },
-      {
-        checked: true,
-        movimiento: 'DEF456',
-        RFC: 'JLK0912837',
-        emisor: 'Compañía XYZ',
-        subtotal: '5,500.00',
-        IVA: '880.00',
-      },
-      {
-        checked: false,
-        movimiento: 'GHI789',
-        RFC: 'ABC12345678',
-        emisor: 'Sociedad de Comercio',
-        subtotal: '8,000.00',
-        IVA: '1,200.00',
-      },
-      {
-        checked: true,
-        movimiento: 'JKL012',
-        RFC: 'XYZ91011234',
-        emisor: 'Empresa S.A.',
-        subtotal: '6,000.00',
-        IVA: '900.00',
-      },
-      {
-        checked: false,
-        movimiento: 'ABC123',
-        RFC: 'XYZ91011234',
-        emisor: 'Empresa S.A.',
-        subtotal: '10,000.00',
-        IVA: '1,600.00',
-      },
-      {
-        checked: true,
-        movimiento: 'DEF456',
-        RFC: 'JLK0912837',
-        emisor: 'Compañía XYZ',
-        subtotal: '5,500.00',
-        IVA: '880.00',
-      },
-      {
-        checked: false,
-        movimiento: 'GHI789',
-        RFC: 'ABC12345678',
-        emisor: 'Sociedad de Comercio',
-        subtotal: '8,000.00',
-        IVA: '1,200.00',
-      },
-      {
-        checked: true,
-        movimiento: 'JKL012',
-        RFC: 'XYZ91011234',
-        emisor: 'Empresa S.A.',
-        subtotal: '6,000.00',
-        IVA: '900.00',
-      },
-      {
-        checked: false,
-        movimiento: 'ABC123',
-        RFC: 'XYZ91011234',
-        emisor: 'Empresa S.A.',
-        subtotal: '10,000.00',
-        IVA: '1,600.00',
-      },
-      {
-        checked: true,
-        movimiento: 'DEF456',
-        RFC: 'JLK0912837',
-        emisor: 'Compañía XYZ',
-        subtotal: '5,500.00',
-        IVA: '880.00',
-      },
-      {
-        checked: false,
-        movimiento: 'GHI789',
-        RFC: 'ABC12345678',
-        emisor: 'Sociedad de Comercio',
-        subtotal: '8,000.00',
-        IVA: '1,200.00',
-      },
-      {
-        checked: true,
-        movimiento: 'JKL012',
-        RFC: 'XYZ91011234',
-        emisor: 'Empresa S.A.',
-        subtotal: '6,000.00',
-        IVA: '900.00',
-      },
-    ]
+   // Datos de ejemplo para cada tabla
+  const dataTab1 = [
+    { registros: '10,000,000', alerta: 'CFDI no cuenta con información global', solucion: 'Identificar si es una sustitución (04)' },
+    { registros: '8,500,000', alerta: 'CFDI global ampara ingresos futuros', solucion: 'Validar información global en el CFDI' },
+    { registros: '7,200,000', alerta: 'Existen conceptos con clave genérica', solucion: 'Identificar uso de clave 01010101' },
+    { registros: '10,000,000', alerta: 'CFDI no cuenta con información global', solucion: 'Identificar si es una sustitución (04)' },
+    { registros: '8,500,000', alerta: 'CFDI global ampara ingresos futuros', solucion: 'Validar información global en el CFDI' },
+    { registros: '7,200,000', alerta: 'Existen conceptos con clave genérica', solucion: 'Identificar uso de clave 01010101' },
+    { registros: '10,000,000', alerta: 'CFDI no cuenta con información global', solucion: 'Identificar si es una sustitución (04)' },
+    { registros: '8,500,000', alerta: 'CFDI global ampara ingresos futuros', solucion: 'Validar información global en el CFDI' },
+    { registros: '7,200,000', alerta: 'Existen conceptos con clave genérica', solucion: 'Identificar uso de clave 01010101' },
+    { registros: '10,000,000', alerta: 'CFDI no cuenta con información global', solucion: 'Identificar si es una sustitución (04)' },
+    { registros: '8,500,000', alerta: 'CFDI global ampara ingresos futuros', solucion: 'Validar información global en el CFDI' },
+    { registros: '7,200,000', alerta: 'Existen conceptos con clave genérica', solucion: 'Identificar uso de clave 01010101' },
+    { registros: '10,000,000', alerta: 'CFDI no cuenta con información global', solucion: 'Identificar si es una sustitución (04)' },
+    { registros: '8,500,000', alerta: 'CFDI global ampara ingresos futuros', solucion: 'Validar información global en el CFDI' },
+    { registros: '7,200,000', alerta: 'Existen conceptos con clave genérica', solucion: 'Identificar uso de clave 01010101' },
+    { registros: '10,000,000', alerta: 'CFDI no cuenta con información global', solucion: 'Identificar si es una sustitución (04)' },
+    { registros: '8,500,000', alerta: 'CFDI global ampara ingresos futuros', solucion: 'Validar información global en el CFDI' },
+    { registros: '7,200,000', alerta: 'Existen conceptos con clave genérica', solucion: 'Identificar uso de clave 01010101' },
+  ]
 
-    setTableData(mockData)
+  const dataTab2 = [
+    { registros: '5,000,000', alerta: 'El CFDI fue emitido extemporáneamente', solucion: 'Revisar si cumple con 5 días hábiles' },
+    { registros: '3,400,000', alerta: 'REP no corresponde al CFDI', solucion: 'Verificar asociación con CFDI origen' },
+    { registros: '2,100,000', alerta: 'Egreso no deducible / IVA no acreditable', solucion: 'Identificar uso de CFDI S01' },
+    { registros: '5,000,000', alerta: 'El CFDI fue emitido extemporáneamente', solucion: 'Revisar si cumple con 5 días hábiles' },
+    { registros: '3,400,000', alerta: 'REP no corresponde al CFDI', solucion: 'Verificar asociación con CFDI origen' },
+    { registros: '2,100,000', alerta: 'Egreso no deducible / IVA no acreditable', solucion: 'Identificar uso de CFDI S01' },
+    { registros: '5,000,000', alerta: 'El CFDI fue emitido extemporáneamente', solucion: 'Revisar si cumple con 5 días hábiles' },
+    { registros: '3,400,000', alerta: 'REP no corresponde al CFDI', solucion: 'Verificar asociación con CFDI origen' },
+    { registros: '2,100,000', alerta: 'Egreso no deducible / IVA no acreditable', solucion: 'Identificar uso de CFDI S01' },
+    { registros: '5,000,000', alerta: 'El CFDI fue emitido extemporáneamente', solucion: 'Revisar si cumple con 5 días hábiles' },
+    { registros: '3,400,000', alerta: 'REP no corresponde al CFDI', solucion: 'Verificar asociación con CFDI origen' },
+    { registros: '2,100,000', alerta: 'Egreso no deducible / IVA no acreditable', solucion: 'Identificar uso de CFDI S01' },
+    { registros: '5,000,000', alerta: 'El CFDI fue emitido extemporáneamente', solucion: 'Revisar si cumple con 5 días hábiles' },
+    { registros: '3,400,000', alerta: 'REP no corresponde al CFDI', solucion: 'Verificar asociación con CFDI origen' },
+    { registros: '2,100,000', alerta: 'Egreso no deducible / IVA no acreditable', solucion: 'Identificar uso de CFDI S01' },
+    { registros: '5,000,000', alerta: 'El CFDI fue emitido extemporáneamente', solucion: 'Revisar si cumple con 5 días hábiles' },
+  ]
 
-    const mockNotes =`
-        - Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        - sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        - Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        - Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        - sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        - Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        `
-    setMyBloc(mockNotes)
-  },[])
+  const dataTab3 = [
+    { registros: '1,000,000', alerta: 'Registro asignado en universo no considerado', solucion: 'Validar forma de pago usada' },
+    { registros: '850,000', alerta: 'REP ampara pago futuro', solucion: 'Verificar fecha de pago contra CFDI' },
+    { registros: '500,000', alerta: 'Error de asociación REP', solucion: 'Revisar CFDI relacionado o cancelado' },
+    { registros: '1,000,000', alerta: 'Registro asignado en universo no considerado', solucion: 'Validar forma de pago usada' },
+    { registros: '850,000', alerta: 'REP ampara pago futuro', solucion: 'Verificar fecha de pago contra CFDI' },
+  ]
+
+  const tabs = [
+    { label: 'Hallazgos Tipo 1', data: dataTab1, icon:  <Eye/> },
+    { label: 'Hallazgos Tipo 2', data: dataTab2, icon: <Compass/> },
+    { label: 'Errores', data: dataTab3, icon:  <TriangleAlert/> },
+  ]
+
+  const [activeTab, setActiveTab] = useState(0)
+  const [ showModalSuccessProcess, setShowModalSuccessProcess] = useState(false)
+
+  const now = new Date()
+  const formattedDate = format(now, 'MMMM yyyy', { locale: es })
+  const date= formattedDate[0].toUpperCase() + formattedDate.slice(1)
+  const month = params.get('mes')
+  const year = params.get('anio')
 
   return (
     <div className="p-4 mt-16 md:p-10 bg-gray-[#F2F5F6] min-h-full">
-      <div className="flex justify-between items-start mb-6">
+      <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate(-1)}
@@ -151,59 +92,69 @@ const ReporteHallazgos = () => {
           <h1 className="text-3xl font-bold">Reporte de Hallazgos</h1>
         </div>
         <p className="text-right font-semibold text-gray-500">
-        Periodo: <span className="text-gray-500">Diciembre 2024</span>
+          Periodo: <span className="text-gray-500"> {(month !== '' && year !== '') ?  <>{month} {year} </> : <>{date}</>}</span>
         </p>
       </div>
-      <div className="grid md:grid-cols-[1.2fr_1.2fr] gap-6 mb-6">
-        <div className="bg-white shadow-md p-4 rounded-xl flex flex-col gap-2 flex-1 min-h-[260px] max-h-[340px]">
-          <div className="flex justify-between items-center text-[#143559]">
-            <h2 className="text-2xl font-semibold">Hallazgos</h2>
-            <ReportProblemIcon fontSize="large" />
-          </div>
-          <div className="flex flex-1 items-center justify-center">
-            <PieChart style={{ width: '85%', height: '85%' }} />
-          </div>
-        </div>
-        {/*Bloc dfe notas */}
-        <div className="bg-white shadow-md p-4 rounded-xl flex flex-col gap-2 flex-1 min-h-[260px] max-h-[340px]">
-          <span className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold text-[#143559]">Bloc de notas</h2>
+      <div className="px-1 py-3">
+        {/* Encabezado con botones */}
+        <div
+          className="flex justify-between bg-[#337AB7] items-center gap-2 mb-0 py-3 px-12
+          rounded-t-lg">
+          {tabs.map((tab, index) => (
             <button
-              onClick={() => setModalNotepadOpen(true)}
-              className="flex items-center gap-2 px-1 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
-                  text-sm transition-all duration-300 border-[#143559]
-                  w-26 h-10 justify-center hover:bg-[#143559] hover:text-white">
-              <DriveFileRenameOutlineOutlinedIcon fontSize="medium"/>
-                Editar
+              key={index}
+              onClick={() => setActiveTab(index)}
+              className={`px-4 py-2 flex rounded-lg font-bold transition hover:bg-gray-300 hover:text-[#337AB7]
+                ${activeTab === index ? 'bg-white text-[#337AB7]' : 'bg-[#337AB7] text-white'}`}
+            >
+              {tab.label}
+              <span className='ml-2'>{tab.icon}</span>
             </button>
-          </span>
-          <h3 className="text-sm font-medium text-[#4B5563]">Registra tu actividad para su consula posterior</h3>
-          <textarea
-            className="w-full h-full p-0 text-sm resize-none bg-transparent outline-none"
-            value={nota}
-            onChange={(e) => setNota(e.target.value)}
-            readOnly
-            placeholder={myBloc}
-          />
+          ))}
+        </div>
+        {/* Tabla */}
+        <div className="border border-[#143559] rounded-b-lg shadow-lg overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-[#143559] text-white sticky top-0">
+              <tr>
+                <th className="px-4 py-2 text-left">Registros</th>
+                <th className="px-4 py-2 text-left">Alerta</th>
+                <th className="px-4 py-2 text-left">Solución</th>
+              </tr>
+            </thead>
+          </table>
+          <div className="max-h-[45vh] overflow-y-auto">
+            <table className="w-full">
+              <tbody className="text-sm">
+                {tabs[activeTab].data.map((row, idx) => (
+                  <tr key={idx} className={idx % 2 === 0 ? 'bg-[#CFE5FF]' : 'bg-white'}>
+                    <td className="px-4 py-1">{row.registros}</td>
+                    <td className="px-4 py-1">{row.alerta}</td>
+                    <td className="px-4 py-1">{row.solucion}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div className="bg-white shadow-md p-4 rounded-xl">
-        <div className="text-center">
-          <CheckTable data={tableData} />
-        </div>
-      </div>
-      <span className="flex justify-end items-center mt-6">
+      <span className="flex justify-end items-center mt-1">
         <button
-          onClick={() => setModalOpen(true)}
-          className="flex items-center gap-3 px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
+          onClick={() => setShowModalSuccessProcess(true)}
+          className="flex items-center gap-0 px-2 py-1 rounded-md border-2 shadow-[0_4px_12px_rgba(20,53,89,0.3)]
                   text-sm transition-all duration-300 border-[#143559]
                   w-32 justify-center hover:bg-[#143559] hover:text-white">
           <FileDownloadOutlinedIcon fontSize="large"/>
             Descargar Reporte
         </button>
       </span>
-      <DownloadTable isOpen={modalOpen} onClose={setModalOpen} />
-      <ModalNotepad isOpen={modalNotepadOpen} onClose={setModalNotepadOpen} data={myBloc} />
+      <ModalSuccessProcess
+        isOpen={showModalSuccessProcess}
+        onClose={() => setShowModalSuccessProcess(false)}
+        processTitle="Realizando"
+        successTitle="Reporte Descargado"
+        successMessage="La descarga del reporte se ha realizado exitosamente."
+      />
     </div>
   )
 }

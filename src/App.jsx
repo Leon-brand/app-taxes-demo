@@ -4,6 +4,7 @@ import IVAHome from './features/modulo-iva/pages/IVAHome'
 import ReporteHallazgos from './features/modulo-iva/pages/ReporteHallazgos'
 import PieChartDetails from './features/modulo-iva/pages/PieChartDetails'
 import VersionesCalculo from './features/modulo-iva/pages/VersionesCalculo'
+import RevisionOperaciones from './features/modulo-iva/pages/RevisionOperaciones'
 import BovedaHome from './features/modulo-boveda/pages/BovedaHome'
 import CFDIsPage from './features/modulo-boveda/pages/CFDIsPage'
 import ContablesPage from './features/modulo-boveda/pages/ContablesPage'
@@ -43,6 +44,7 @@ function App() {
         <Route path="/reporte-hallazgos" element={<ReporteHallazgos />} />
         <Route path="/grafica-detalles" element={<PieChartDetails />} />|
         <Route path="/versiones-calculo" element={<VersionesCalculo />} />
+        <Route path="/revision-operaciones" element={<RevisionOperaciones />} />
         {/*Section Boveda*/}
         <Route path="/boveda-home" element={<BovedaHome />} />
         <Route path="/cfdis" element={<CFDIsPage />} />

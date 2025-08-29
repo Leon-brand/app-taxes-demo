@@ -27,14 +27,14 @@ const Home = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-14">
+      <div className="min-h-screen bg-[#F2F5F6] flex flex-col items-center px-8 py-10 mt-12">
         <div className="flex justify-between items-start w-full mb-2">
           <div>
-            <h1 className="text-3xl font-bold text-[#143559]">Bienvenido</h1>
+            <h1 className="text-4xl font-bold">Bienvenido</h1>
           </div>
           <div className="text-right">
-            <p className="font-semibold text-gray-700">{razonSocial}</p>
-            <p className="text-sm text-gray-500">{rfc}</p>
+            <p className="font-bold text-gray-500 text-2xl">{razonSocial}</p>
+            <p className="text-gray-500 text-md">{rfc}</p>
           </div>
         </div>
         <div className="bg-white rounded-xl px-6 py-3 w-full max-w-[680px] shadow-sm">

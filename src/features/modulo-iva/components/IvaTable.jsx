@@ -14,9 +14,14 @@ const IvaTable = () => {
   ]
 
   return (
-    <TableContainer  className="mb-4">
-      <Table>
-        <TableHead>
+    <TableContainer  className="mt-8 mb-9">
+      <Table sx={{
+        '& .MuiTableCell-root': {
+          padding: '6px 10px',
+          borderBottom: 'none'
+        }
+      }}>
+        <TableHead sx={{ borderBottom: '1px solid #ffffff' }}>
           <TableRow>
             <TableCell sx={{ color: '#143559', fontWeight: 'bold' }}>Tasa</TableCell>
             <TableCell sx={{ color: '#143559', fontWeight: 'bold' }}>Valor de Actos</TableCell>

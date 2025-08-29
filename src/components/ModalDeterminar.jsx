@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useLockBodyScroll from '@/hooks/useLockModalScroll'
 
 import BookmarkAddedOutlinedIcon from '@mui/icons-material/BookmarkAddedOutlined'
 import { Target } from 'lucide-react'
 
 const ModalDeterminar = ({ isOpen, onClose }) => {
-  const [showModal, setShowModal] = useState(false)
+  useLockBodyScroll(isOpen)
 
   const navigate = useNavigate()
 
@@ -16,15 +17,7 @@ const ModalDeterminar = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc)
   }, [onClose])
 
-  useEffect(() => {
-    if (isOpen) {
-      setShowModal(true)
-    } else {
-      setTimeout(() => setShowModal(false), 300)
-    }
-  }, [isOpen])
-
-  if (!isOpen && !showModal) return null
+  if (!isOpen) return null
 
   return (
     <div
@@ -45,7 +38,9 @@ const ModalDeterminar = ({ isOpen, onClose }) => {
         <h2 className="text-3xl font-bold text-[#337AB7] mb-10">Determinar</h2>
         <div className="flex justify-center gap-x-8 mb-8 mt-4">
           <button
-            onClick={() => navigate('/iva-home')}
+            onClick={() => {
+              navigate('/iva-home')
+            }}
             className="flex flex-col items-center justify-center px-1 py-2 rounded-lg shadow-[3px_6px_8px_-1px_rgba(20,53,89,0.5)]
               text-white bg-[#143559] hover:bg-[#0077FF] transition-all max-h-[120px] w-48"
           >

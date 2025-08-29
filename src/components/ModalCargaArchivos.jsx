@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import CustomeDropDown from '@/components/CustomeDropDown'
 import ModalSuccessProcess from '@/components/ModalSuccessProcess'
@@ -43,7 +43,7 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
     setDocumentosCargados([])
     onClose()
   }
-
+  const data = useLocation().pathname
   const uploadFiles = () => {
     const resumen = {
       cantidadArchivos: documentosCargados.length,
@@ -53,8 +53,12 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
     }
 
     setUploadSummary(resumen) // <- Esto activa el modal hijo
+
+    localStorage.setItem('Universos', 'true')
+
     setTimeout(() => {
-      navigate('iva-home', { replace: true })
+      if (data.includes('iva-home')) { window.location.reload()}
+      else navigate('iva-home', { replace: true })
     }, 100)
   }
 
@@ -290,7 +294,6 @@ const ModalCargaArchivos = ({ isOpen, onClose }) => {
                 {documentosCargados.length > 0 && (
                   <span className="absolute -top-3 -right-1 z-10">
                     <span className="inline-flex h-4 w-4 animate-ping rounded-full bg-[#00B69B] opacity-75"></span>
-                    {/*  <span className="inline-flex h-3 w-3 rounded-full bg-[#00B69B] absolute top-0 left-0"></span> */}
                   </span>
                 )}
                 <FileUp size={32} className="mr-2" />

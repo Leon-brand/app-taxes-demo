@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { DoorOpen } from 'lucide-react'
 
 const ModalCloseSession = ({ isOpen, onClose }) => {
-  const [showModal, setShowModal] = useState(false) //  Controla visibilidad real del DOM
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     const handleEsc = (e) => e.key === 'Escape' && onClose()  // Si se presiona Escape, cerrar el modal
@@ -28,7 +28,8 @@ const ModalCloseSession = ({ isOpen, onClose }) => {
   const handleLogout = () => {
     localStorage.removeItem('auth')
     localStorage.removeItem('rfc')
-    //localStorage.removeItem('hasSeenWelcomeModal')
+    localStorage.removeItem('user')
+    localStorage.removeItem('Universos')
     //sessionStorage.clear
     window.location.replace('/login')//prevenir navegación hacia atrás
   }

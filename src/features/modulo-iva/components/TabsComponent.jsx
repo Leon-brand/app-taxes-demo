@@ -11,10 +11,10 @@ const TabsComponent = ({ onTabChange, activeTab }) => {
     { label: 'Trasladado', icon: <SyncAltSharpIcon /> },
     { label: 'Acreditable', icon: <VerifiedRoundedIcon /> },
     { label: 'Retenido', icon: <FrontHandOutlinedIcon /> },
-    { label: 'Determinado', icon: <TroubleshootOutlinedIcon /> },
+    { label: 'Determinación', icon: <TroubleshootOutlinedIcon /> },
   ]
   const handleChange = (event, newValue) => {
-    onTabChange(newValue) // delegás el control a App.jsx
+    onTabChange(newValue)
   }
 
   return (
@@ -28,9 +28,12 @@ const TabsComponent = ({ onTabChange, activeTab }) => {
             iconPosition="start"
             label={tab.label}
             sx={{
+              minHeight: 48,
               backgroundColor: value === index ? '#ffffff' : '#f3f4f6',
               borderTopLeftRadius: '8px',
               borderTopRightRadius: '8px',
+              border: '1px solid rgba(132, 132, 132, 0.4)',
+              padding: '0px 2px',
               fontWeight: 'bold',
               color: '#143559',
               ':hover': {
@@ -39,6 +42,7 @@ const TabsComponent = ({ onTabChange, activeTab }) => {
               },
               '&.Mui-selected': {
                 boxShadow: 'inset 0 -2px 0 #143559',
+                border: 'none',
               },
             }}
           />

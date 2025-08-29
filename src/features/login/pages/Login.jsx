@@ -20,6 +20,7 @@ const Login = () => {
       credentials.password === mockCredentials.password
 
     if (isValid) {
+      localStorage.setItem('user', credentials.username)
       setStep('selectRFC')
     } else {
       setErrorMsg('El usuario y contraseña son incorrectos')

@@ -32,7 +32,7 @@ const Header = () => {
    */
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowUserMenu(false) // Cierra el menú si el clic es fuera
+        setShowUserMenu(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -139,7 +139,7 @@ const Header = () => {
         />
       </div>
       <ModalCargaArchivos isOpen={showModalCargaArchivos} onClose={() => setShowModalCargaArchivos(false)} />
-      <ModalSaveChangesPrompt isOpen={showModalSaveChangesPrompt} onClose={() => setShowModalSaveChangesPrompt(false)} />
+      <ModalSaveChangesPrompt isOpen={showModalSaveChangesPrompt} onClose={() => setShowModalSaveChangesPrompt(false)} route="/"/>
       <ModalCloseSession isOpen={showModalCloseSession} onClose={() => setShowModalCloseSession(false)} />
     </header>
   )

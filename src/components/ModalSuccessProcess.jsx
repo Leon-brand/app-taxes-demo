@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import useLockBodyScroll from '@/hooks/useLockModalScroll'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined'
@@ -11,6 +12,8 @@ const ModalSuccessProcess = ({
   successTitle = 'Completado',
   successMessage = 'Proceso finalizado con exito'
 }) => {
+  useLockBodyScroll(isOpen)
+
   const [showModal, setShowModal] = useState(false)
   const [modalState, setModalState] = useState('processing') // | 'processing' | 'done'
 

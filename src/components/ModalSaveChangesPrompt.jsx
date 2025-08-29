@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useLockBodyScroll from '@/hooks/useLockModalScroll'
 import { Save, CircleX } from 'lucide-react'
-
 import CircularProgress from '@mui/material/CircularProgress'
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined'
 
-const ModalSaveChangesPrompt = ({ isOpen, onClose }) => {
+const ModalSaveChangesPrompt = ({ isOpen, onClose, route }) => {
+  useLockBodyScroll(isOpen)
+
   const [showModal, setShowModal] = useState(false)
   const [ modalState, setModalState ] = useState('confirm') // 'confirm' | 'saving' | 'done'
 
@@ -32,7 +34,7 @@ const ModalSaveChangesPrompt = ({ isOpen, onClose }) => {
   const handleExitWithoutSaving = () => {
     onClose()
     setTimeout(() => {
-      navigate('/', { replace: true })
+      navigate(route, { replace: true })
     }, 100)
   }
 
@@ -47,7 +49,7 @@ const ModalSaveChangesPrompt = ({ isOpen, onClose }) => {
   const handleAcceptAndClose = () => {
     onClose()
     setTimeout(() => {
-      navigate('/', { replace: true })
+      navigate(route, { replace: true })
     }, 300)
   }
 
@@ -141,4 +143,5 @@ export default ModalSaveChangesPrompt
 ModalSaveChangesPrompt.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  route: PropTypes.string.isRequired
 }

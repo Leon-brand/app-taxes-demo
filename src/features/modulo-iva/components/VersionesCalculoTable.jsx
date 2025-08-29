@@ -6,7 +6,6 @@ const VersionesCalculoTable = ({ data = [] }) => {
 
   return (
     <section className="mt-10">
-      <hr className="border-t border-gray-300 mb-6" />
       <h1 className="text-3xl font-bold mb-2 p-2">Versiones de Cálculo</h1>
       <div className="overflow-x-auto rounded-xl border border-gray-300">
         <table className="min-w-full text-sm text-center">

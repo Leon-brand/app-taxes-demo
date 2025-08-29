@@ -16,7 +16,7 @@ const ModalConfiguracionColumnas = ({ isOpen, onClose, columnasDisponibles = [],
         ? prev.filter((c) => c !== columna)// La quita si ya está
         : [...prev, columna]// La agrega si no está
     )
-    console.log(seleccionadas)
+    /* console.log(seleccionadas) */
   }
 
   const onSave = () => {
