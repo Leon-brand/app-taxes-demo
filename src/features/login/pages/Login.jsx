@@ -23,7 +23,8 @@ const Login = () => {
       localStorage.setItem('user', credentials.username)
       setStep('selectRFC')
     } else {
-      setErrorMsg('El usuario y contraseña son incorrectos')
+      setErrorMsg('El usuario y/o la contraseña son incorrectos')
+      alert('El usuario es admin y la contraseña es 1234')
     }
   }
 
