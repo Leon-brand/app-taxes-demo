@@ -78,7 +78,8 @@ const Login = () => {
       >
         <div className="max-w-md relative">
           <img
-            src="/logoTransparente.png"
+          /* variable interna que Vite inyecta automáticamente en tiempo de compilación */
+            src={`${import.meta.env.BASE_URL}logoTransparente.png`}
             alt="Intelitax"
             className="w-[410px] h-[120px] mb-6 object-contain"
           />

@@ -31,7 +31,7 @@ const ModalCloseSession = ({ isOpen, onClose }) => {
     localStorage.removeItem('user')
     localStorage.removeItem('Universos')
     //sessionStorage.clear
-    window.location.replace('/login')//prevenir navegación hacia atrás
+    window.location.replace(`${window.location.origin}/app-taxes-demo/#/login`)
   }
 
   return (
